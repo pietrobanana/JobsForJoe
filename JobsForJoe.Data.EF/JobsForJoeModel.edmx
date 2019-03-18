@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="JobsForJoeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Locations">
+          <Key>
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="LocationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StoreNumber" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="State" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="ManagerID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="StoreImage" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="OpenPositions">
+          <Key>
+            <PropertyRef Name="OpenPositionID" />
+          </Key>
+          <Property Name="OpenPositionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PositionID" Type="int" Nullable="false" />
+          <Property Name="LocationID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Positions">
+          <Key>
+            <PropertyRef Name="PositionID" />
+          </Key>
+          <Property Name="PositionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="JobDescription" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="UserDetails">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ResumeFileName" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="BaristaImage" Type="varchar" MaxLength="100" />
+          <Property Name="IsEmployed" Type="bit" Nullable="false" />
+          <Property Name="Bio" Type="varchar(max)" />
+        </EntityType>
+        <Association Name="FK_OpenPositions_Locations">
+          <End Role="Locations" Type="Self.Locations" Multiplicity="1" />
+          <End Role="OpenPositions" Type="Self.OpenPositions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="OpenPositions">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OpenPositions_Positions">
+          <End Role="Positions" Type="Self.Positions" Multiplicity="1" />
+          <End Role="OpenPositions" Type="Self.OpenPositions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Positions">
+              <PropertyRef Name="PositionID" />
+            </Principal>
+            <Dependent Role="OpenPositions">
+              <PropertyRef Name="PositionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="JobsForJoeModelStoreContainer">
+          <EntitySet Name="Locations" EntityType="Self.Locations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OpenPositions" EntityType="Self.OpenPositions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Positions" EntityType="Self.Positions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_OpenPositions_Locations" Association="Self.FK_OpenPositions_Locations">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="OpenPositions" EntitySet="OpenPositions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OpenPositions_Positions" Association="Self.FK_OpenPositions_Positions">
+            <End Role="Positions" EntitySet="Positions" />
+            <End Role="OpenPositions" EntitySet="OpenPositions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="JobsForJoeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="LocationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StoreNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="State" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ManagerID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StoreImage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="OpenPositions" Relationship="Self.FK_OpenPositions_Locations" FromRole="Locations" ToRole="OpenPositions" />
+        </EntityType>
+        <EntityType Name="OpenPosition">
+          <Key>
+            <PropertyRef Name="OpenPositionID" />
+          </Key>
+          <Property Name="OpenPositionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PositionID" Type="Int32" Nullable="false" />
+          <Property Name="LocationID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Location" Relationship="Self.FK_OpenPositions_Locations" FromRole="OpenPositions" ToRole="Locations" />
+          <NavigationProperty Name="Position" Relationship="Self.FK_OpenPositions_Positions" FromRole="OpenPositions" ToRole="Positions" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="PositionID" />
+          </Key>
+          <Property Name="PositionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="JobDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="OpenPositions" Relationship="Self.FK_OpenPositions_Positions" FromRole="Positions" ToRole="OpenPositions" />
+        </EntityType>
+        <EntityType Name="UserDetail">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ResumeFileName" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BaristaImage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IsEmployed" Type="Boolean" Nullable="false" />
+          <Property Name="Bio" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_OpenPositions_Locations">
+          <End Role="Locations" Type="Self.Location" Multiplicity="1" />
+          <End Role="OpenPositions" Type="Self.OpenPosition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="OpenPositions">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OpenPositions_Positions">
+          <End Role="Positions" Type="Self.Position" Multiplicity="1" />
+          <End Role="OpenPositions" Type="Self.OpenPosition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Positions">
+              <PropertyRef Name="PositionID" />
+            </Principal>
+            <Dependent Role="OpenPositions">
+              <PropertyRef Name="PositionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="JobsForJoeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Locations" EntityType="Self.Location" />
+          <EntitySet Name="OpenPositions" EntityType="Self.OpenPosition" />
+          <EntitySet Name="Positions" EntityType="Self.Position" />
+          <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
+          <AssociationSet Name="FK_OpenPositions_Locations" Association="Self.FK_OpenPositions_Locations">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="OpenPositions" EntitySet="OpenPositions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OpenPositions_Positions" Association="Self.FK_OpenPositions_Positions">
+            <End Role="Positions" EntitySet="Positions" />
+            <End Role="OpenPositions" EntitySet="OpenPositions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="JobsForJoeModelStoreContainer" CdmEntityContainer="JobsForJoeEntities">
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="JobsForJoeModel.Location">
+              <MappingFragment StoreEntitySet="Locations">
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="StoreNumber" ColumnName="StoreNumber" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="ManagerID" ColumnName="ManagerID" />
+                <ScalarProperty Name="StoreImage" ColumnName="StoreImage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OpenPositions">
+            <EntityTypeMapping TypeName="JobsForJoeModel.OpenPosition">
+              <MappingFragment StoreEntitySet="OpenPositions">
+                <ScalarProperty Name="OpenPositionID" ColumnName="OpenPositionID" />
+                <ScalarProperty Name="PositionID" ColumnName="PositionID" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Positions">
+            <EntityTypeMapping TypeName="JobsForJoeModel.Position">
+              <MappingFragment StoreEntitySet="Positions">
+                <ScalarProperty Name="PositionID" ColumnName="PositionID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="JobDescription" ColumnName="JobDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserDetails">
+            <EntityTypeMapping TypeName="JobsForJoeModel.UserDetail">
+              <MappingFragment StoreEntitySet="UserDetails">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="ResumeFileName" ColumnName="ResumeFileName" />
+                <ScalarProperty Name="BaristaImage" ColumnName="BaristaImage" />
+                <ScalarProperty Name="IsEmployed" ColumnName="IsEmployed" />
+                <ScalarProperty Name="Bio" ColumnName="Bio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
