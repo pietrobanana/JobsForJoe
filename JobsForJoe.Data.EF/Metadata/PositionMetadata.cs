@@ -10,9 +10,9 @@ namespace JobsForJoe.Data.EF//.Metadata
     [MetadataType(typeof(PositionMetadata))]
     public partial class Position { }
 
-    class PositionMetadata
+    public class PositionMetadata
     {
-        public int PositionID { get; set; }
+        //public int PositionID { get; set; }
 
         [Required(ErrorMessage = "***Please enter a Job Title")]
         [Display(Name ="Job Title")]

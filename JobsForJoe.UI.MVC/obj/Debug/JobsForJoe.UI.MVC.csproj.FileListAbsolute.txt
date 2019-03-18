@@ -55,6 +55,9 @@ C:\Users\student\Documents\Visual Studio 2015\Projects\JobsForJoe\src\JobsForJoe
 C:\Users\student\Documents\Visual Studio 2015\Projects\JobsForJoe\src\JobsForJoe.UI.MVC\bin\Microsoft.AI.Web.xml
 C:\Users\student\Documents\Visual Studio 2015\Projects\JobsForJoe\src\JobsForJoe.UI.MVC\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\student\Documents\Visual Studio 2015\Projects\JobsForJoe\src\JobsForJoe.UI.MVC\bin\Microsoft.ApplicationInsights.xml
+C:\Users\student\Documents\Visual Studio 2015\Projects\JobsForJoe\src\JobsForJoe.UI.MVC\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\student\Documents\Visual Studio 2015\Projects\JobsForJoe\src\JobsForJoe.UI.MVC\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\student\Documents\Visual Studio 2015\Projects\JobsForJoe\src\JobsForJoe.UI.MVC\bin\Microsoft.AspNet.Identity.Owin.xml
 C:\Users\student\Documents\Visual Studio 2015\Projects\JobsForJoe\src\JobsForJoe.UI.MVC\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\student\Documents\Visual Studio 2015\Projects\JobsForJoe\src\JobsForJoe.UI.MVC\bin\System.Web.Helpers.xml
 C:\Users\student\Documents\Visual Studio 2015\Projects\JobsForJoe\src\JobsForJoe.UI.MVC\bin\System.Web.Mvc.xml
@@ -67,9 +70,6 @@ C:\Users\student\Documents\Visual Studio 2015\Projects\JobsForJoe\src\JobsForJoe
 C:\Users\student\Documents\Visual Studio 2015\Projects\JobsForJoe\src\JobsForJoe.UI.MVC\bin\Newtonsoft.Json.xml
 C:\Users\student\Documents\Visual Studio 2015\Projects\JobsForJoe\src\JobsForJoe.UI.MVC\bin\EntityFramework.xml
 C:\Users\student\Documents\Visual Studio 2015\Projects\JobsForJoe\src\JobsForJoe.UI.MVC\bin\EntityFramework.SqlServer.xml
-C:\Users\student\Documents\Visual Studio 2015\Projects\JobsForJoe\src\JobsForJoe.UI.MVC\bin\Microsoft.AspNet.Identity.Core.xml
-C:\Users\student\Documents\Visual Studio 2015\Projects\JobsForJoe\src\JobsForJoe.UI.MVC\bin\Microsoft.AspNet.Identity.Owin.xml
-C:\Users\student\Documents\Visual Studio 2015\Projects\JobsForJoe\src\JobsForJoe.UI.MVC\bin\Microsoft.AspNet.Identity.EntityFramework.xml
 C:\Users\student\Documents\Visual Studio 2015\Projects\JobsForJoe\src\JobsForJoe.UI.MVC\bin\Microsoft.Owin.xml
 C:\Users\student\Documents\Visual Studio 2015\Projects\JobsForJoe\src\JobsForJoe.UI.MVC\bin\Microsoft.Owin.Host.SystemWeb.xml
 C:\Users\student\Documents\Visual Studio 2015\Projects\JobsForJoe\src\JobsForJoe.UI.MVC\bin\Microsoft.Owin.Security.xml

@@ -10,9 +10,9 @@ namespace JobsForJoe.Data//.EF.Metadata
     [MetadataType(typeof(UserDetailMetadata))]
     public partial class UserDetail { }
 
-    class UserDetailMetadata
+    public class UserDetailMetadata
     {
-        public string UserID { get; set; }
+        //public string UserID { get; set; }
 
         [Required(ErrorMessage ="***Please enter your First Name***")]
         [Display(Name ="First Name")]

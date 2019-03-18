@@ -148,6 +148,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application.cs">
+      <DependentUpon>JobsForJoeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="JobsForJoeModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -166,6 +169,7 @@
     <Compile Include="Location.cs">
       <DependentUpon>JobsForJoeModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Metadata\ApplicationMetadata.cs" />
     <Compile Include="Metadata\LocationMetadata.cs" />
     <Compile Include="Metadata\PositionMetadata.cs" />
     <Compile Include="Metadata\UserDetailMetadata.cs" />

@@ -10,9 +10,9 @@ namespace JobsForJoe.Data.EF//.Metadata
     [MetadataType(typeof(LocationMetadata))]
     public partial class Location { }
 
-    class LocationMetadata
+    public class LocationMetadata
     {
-        public int LocationID { get; set; }
+        //public int LocationID { get; set; }
 
         [Required(ErrorMessage = "***Please Provide Store Number***")]
         [Display(Name ="Store Number")]

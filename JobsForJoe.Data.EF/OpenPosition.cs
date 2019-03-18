@@ -14,11 +14,19 @@ namespace JobsForJoe.Data.EF
     
     public partial class OpenPosition
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public OpenPosition()
+        {
+            this.Applications = new HashSet<Application>();
+        }
+    
         public int OpenPositionID { get; set; }
         public int PositionID { get; set; }
         public int LocationID { get; set; }
     
         public virtual Location Location { get; set; }
         public virtual Position Position { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Application> Applications { get; set; }
     }
 }

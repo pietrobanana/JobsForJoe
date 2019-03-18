@@ -1,9 +1,6 @@
+C:\Users\student\Documents\Visual Studio 2015\Projects\JobsForJoe\src\JobsForJoe.Data.EF\bin\Debug\JobsForJoe.Data.EF.dll.config
 C:\Users\student\Documents\Visual Studio 2015\Projects\JobsForJoe\src\JobsForJoe.Data.EF\bin\Debug\JobsForJoe.Data.EF.dll
 C:\Users\student\Documents\Visual Studio 2015\Projects\JobsForJoe\src\JobsForJoe.Data.EF\bin\Debug\JobsForJoe.Data.EF.pdb
-C:\Users\student\Documents\Visual Studio 2015\Projects\JobsForJoe\src\JobsForJoe.Data.EF\obj\Debug\JobsForJoe.Data.EF.csprojResolveAssemblyReference.cache
-C:\Users\student\Documents\Visual Studio 2015\Projects\JobsForJoe\src\JobsForJoe.Data.EF\obj\Debug\JobsForJoe.Data.EF.dll
-C:\Users\student\Documents\Visual Studio 2015\Projects\JobsForJoe\src\JobsForJoe.Data.EF\obj\Debug\JobsForJoe.Data.EF.pdb
-C:\Users\student\Documents\Visual Studio 2015\Projects\JobsForJoe\src\JobsForJoe.Data.EF\bin\Debug\JobsForJoe.Data.EF.dll.config
 C:\Users\student\Documents\Visual Studio 2015\Projects\JobsForJoe\src\JobsForJoe.Data.EF\bin\Debug\Antlr3.Runtime.dll
 C:\Users\student\Documents\Visual Studio 2015\Projects\JobsForJoe\src\JobsForJoe.Data.EF\bin\Debug\EntityFramework.dll
 C:\Users\student\Documents\Visual Studio 2015\Projects\JobsForJoe\src\JobsForJoe.Data.EF\bin\Debug\EntityFramework.SqlServer.dll
@@ -53,3 +50,6 @@ C:\Users\student\Documents\Visual Studio 2015\Projects\JobsForJoe\src\JobsForJoe
 C:\Users\student\Documents\Visual Studio 2015\Projects\JobsForJoe\src\JobsForJoe.Data.EF\bin\Debug\System.Web.WebPages.xml
 C:\Users\student\Documents\Visual Studio 2015\Projects\JobsForJoe\src\JobsForJoe.Data.EF\bin\Debug\System.Web.WebPages.Deployment.xml
 C:\Users\student\Documents\Visual Studio 2015\Projects\JobsForJoe\src\JobsForJoe.Data.EF\bin\Debug\System.Web.WebPages.Razor.xml
+C:\Users\student\Documents\Visual Studio 2015\Projects\JobsForJoe\src\JobsForJoe.Data.EF\obj\Debug\JobsForJoe.Data.EF.dll
+C:\Users\student\Documents\Visual Studio 2015\Projects\JobsForJoe\src\JobsForJoe.Data.EF\obj\Debug\JobsForJoe.Data.EF.pdb
+C:\Users\student\Documents\Visual Studio 2015\Projects\JobsForJoe\src\JobsForJoe.Data.EF\obj\Debug\JobsForJoe.Data.EF.csprojResolveAssemblyReference.cache

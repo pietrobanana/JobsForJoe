@@ -29,5 +29,6 @@ namespace JobsForJoe.Data.EF
         public virtual DbSet<OpenPosition> OpenPositions { get; set; }
         public virtual DbSet<Position> Positions { get; set; }
         public virtual DbSet<UserDetail> UserDetails { get; set; }
+        public virtual DbSet<Application> Applications { get; set; }
     }
 }
