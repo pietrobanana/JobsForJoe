@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using JobsForJoe.Data.EF;
+using Microsoft.AspNet.Identity;
 
 namespace JobsForJoe.UI.MVC.Controllers
 {
@@ -97,6 +98,17 @@ namespace JobsForJoe.UI.MVC.Controllers
             ViewBag.PositionID = new SelectList(db.Positions, "PositionID", "Title", openPosition.PositionID);
             return View(openPosition);
         }
+
+        public ActionResult Apply(int id)
+        {
+            User.Identity.GetUserId();
+            db.OpenPositions.Add(OpenPosition);
+            return View();
+        }
+
+
+
+
 
         // GET: OpenPositions/Delete/5
         public ActionResult Delete(int? id)

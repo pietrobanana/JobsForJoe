@@ -65,6 +65,18 @@ namespace JobsForJoe.UI.MVC.Models
     public class RegisterViewModel
     {
         [Required]
+        public string FirstName { get; set; }
+        [Required]
+        public string LastName { get; set; }
+        public string ResumeFileName { get; set; }
+        public string BaristaImage { get; set; }
+
+        [Required]
+        public bool IsEmployed { get; set; }
+
+        public string Bio { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }

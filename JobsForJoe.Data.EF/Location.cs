@@ -19,15 +19,14 @@ namespace JobsForJoe.Data.EF
         {
             this.OpenPositions = new HashSet<OpenPosition>();
         }
-
+    
         public int LocationID { get; set; }
-        public string StoreName { get; set; }
         public string StoreNumber { get; set; }
         public string City { get; set; }
         public string State { get; set; }
         public string ManagerID { get; set; }
         public string StoreImage { get; set; }
-        
+        public string StoreName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OpenPosition> OpenPositions { get; set; }

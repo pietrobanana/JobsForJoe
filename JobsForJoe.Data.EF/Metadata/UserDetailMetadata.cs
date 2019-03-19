@@ -22,7 +22,7 @@ namespace JobsForJoe.Data//.EF.Metadata
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "***Please enter your Resume File***")]
+        //[Required(ErrorMessage = "***Please enter your Resume File***")]
         [Display(Name = "Personal Resume")]
         public string ResumeFileName { get; set; }
 

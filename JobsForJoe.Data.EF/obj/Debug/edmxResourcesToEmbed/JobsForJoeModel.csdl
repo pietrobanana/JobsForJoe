@@ -40,7 +40,7 @@
     <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="ResumeFileName" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ResumeFileName" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
     <Property Name="BaristaImage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="IsEmployed" Type="Boolean" Nullable="false" />
     <Property Name="Bio" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />

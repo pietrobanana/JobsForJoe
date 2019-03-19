@@ -47,7 +47,7 @@
     <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="ResumeFileName" Type="varchar" MaxLength="75" Nullable="false" />
+    <Property Name="ResumeFileName" Type="varchar" MaxLength="75" />
     <Property Name="BaristaImage" Type="varchar" MaxLength="100" />
     <Property Name="IsEmployed" Type="bit" Nullable="false" />
     <Property Name="Bio" Type="varchar(max)" />

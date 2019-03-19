@@ -1,4 +1,5 @@
-﻿using JobsForJoe.UI.MVC.Models;
+﻿using JobsForJoe.Data.EF;
+using JobsForJoe.UI.MVC.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -153,6 +154,20 @@ namespace JobsForJoe.UI.MVC.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    #region Dealing with custom user details
+                    UserDetail newUserDeets = new UserDetail();
+                    newUserDeets.UserID = user.Id;
+                    newUserDeets.FirstName = model.FirstName;
+                    newUserDeets.LastName = model.LastName;
+                    newUserDeets.ResumeFileName = model.ResumeFileName;//--TODO: handle file upload
+                    newUserDeets.BaristaImage = model.BaristaImage;
+                    newUserDeets.IsEmployed = model.IsEmployed;
+                    newUserDeets.Bio = model.Bio;   
+                    JobsForJoeEntities db = new JobsForJoeEntities();
+                    db.UserDetails.Add(newUserDeets);
+                    db.SaveChanges();
+                    #endregion
+
                     var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
