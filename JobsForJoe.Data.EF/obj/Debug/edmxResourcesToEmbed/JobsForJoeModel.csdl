@@ -11,6 +11,7 @@
     <Property Name="ManagerID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="StoreImage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="OpenPositions" Relationship="Self.FK_OpenPositions_Locations" FromRole="Locations" ToRole="OpenPositions" />
+    <Property Name="StoreName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="OpenPosition">
     <Key>

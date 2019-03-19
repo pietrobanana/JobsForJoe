@@ -4,6 +4,7 @@
     <EntitySetMapping Name="Locations">
       <EntityTypeMapping TypeName="JobsForJoeModel.Location">
         <MappingFragment StoreEntitySet="Locations">
+          <ScalarProperty Name="StoreName" ColumnName="StoreName" />
           <ScalarProperty Name="LocationID" ColumnName="LocationID" />
           <ScalarProperty Name="StoreNumber" ColumnName="StoreNumber" />
           <ScalarProperty Name="City" ColumnName="City" />

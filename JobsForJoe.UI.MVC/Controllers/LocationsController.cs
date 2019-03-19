@@ -46,7 +46,7 @@ namespace JobsForJoe.UI.MVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "LocationID,StoreNumber,City,State,ManagerID,StoreImage")] Location location)
+        public ActionResult Create([Bind(Include = "LocationID,StoreName,StoreNumber,City,State,ManagerID,StoreImage")] Location location)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace JobsForJoe.UI.MVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "LocationID,StoreNumber,City,State,ManagerID,StoreImage")] Location location)
+        public ActionResult Edit([Bind(Include = "LocationID,StoreName,StoreNumber,City,State,ManagerID,StoreImage")] Location location)
         {
             if (ModelState.IsValid)
             {

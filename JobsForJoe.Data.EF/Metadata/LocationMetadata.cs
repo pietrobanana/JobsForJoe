@@ -12,7 +12,12 @@ namespace JobsForJoe.Data.EF//.Metadata
 
     public class LocationMetadata
     {
-        //public int LocationID { get; set; }
+
+        public int LocationID { get; set; }
+
+        [Required(ErrorMessage = "***Please Provide Store Name***")]
+        [Display(Name = "Store Name")]
+        public string StoreName { get; set; }
 
         [Required(ErrorMessage = "***Please Provide Store Number***")]
         [Display(Name ="Store Number")]

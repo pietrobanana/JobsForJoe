@@ -17,6 +17,7 @@
       <PropertyRef Name="LocationID" />
     </Key>
     <Property Name="LocationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StoreName" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="StoreNumber" Type="varchar" MaxLength="10" Nullable="false" />
     <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="State" Type="char" MaxLength="2" Nullable="false" />

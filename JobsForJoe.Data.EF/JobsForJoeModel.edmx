@@ -22,6 +22,7 @@
             <PropertyRef Name="LocationID" />
           </Key>
           <Property Name="LocationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StoreName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="StoreNumber" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="State" Type="char" MaxLength="2" Nullable="false" />
@@ -126,6 +127,7 @@
           <Property Name="ManagerID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="StoreImage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="OpenPositions" Relationship="Self.FK_OpenPositions_Locations" FromRole="Locations" ToRole="OpenPositions" />
+          <Property Name="StoreName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="OpenPosition">
           <Key>
@@ -236,6 +238,7 @@
           <EntitySetMapping Name="Locations">
             <EntityTypeMapping TypeName="JobsForJoeModel.Location">
               <MappingFragment StoreEntitySet="Locations">
+                <ScalarProperty Name="StoreName" ColumnName="StoreName" />
                 <ScalarProperty Name="LocationID" ColumnName="LocationID" />
                 <ScalarProperty Name="StoreNumber" ColumnName="StoreNumber" />
                 <ScalarProperty Name="City" ColumnName="City" />

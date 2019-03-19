@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<JobsForJoe.Data.EF.OpenPosition>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Open Positions";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -13,6 +13,9 @@
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Location.StoreNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Location.StoreName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Position.Title)
@@ -24,6 +27,9 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Location.StoreNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Location.StoreName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Position.Title)
