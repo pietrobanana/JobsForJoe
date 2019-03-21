@@ -1,8 +1,11 @@
-﻿using JobsForJoe.Data.EF;
+﻿using cStoreMVC.Doamin.Services;
+using JobsForJoe.Data.EF;
 using JobsForJoe.UI.MVC.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using System;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -146,7 +149,7 @@ namespace JobsForJoe.UI.MVC.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model, HttpPostedFileBase userPicture)
         {
             if (ModelState.IsValid)
             {
@@ -154,6 +157,51 @@ namespace JobsForJoe.UI.MVC.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    #region FILE UPLOAD (CREATE) WITH IMAGE SERVICE
+                    string imageName = "NoImage.jpg";
+                    if (userPicture != null)
+                    {
+                        //Find the extension
+                        imageName = userPicture.FileName;
+                        string imgExtension = userPicture.FileName.Substring(imageName.LastIndexOf("."));
+
+                        string[] goodExtensions = { ".jpg", ".jpeg", ".gif", ".png" };
+
+                        if (goodExtensions.Contains(imgExtension.ToLower()))
+                        {
+                            imageName = Guid.NewGuid() + imgExtension; // Create unique file name with a guid. 
+
+                            //Rather than save this file to the server directly, we'll use imageservice* to do it.
+                            //make 2 copies, main & thumbnail.
+
+                            //Lets make all the param that we need.
+                            string imgPath = Server.MapPath("~/Content/Images/Users/"); //Folder path.
+
+                            Image convertedImage = Image.FromStream(userPicture.InputStream); //Manipulates the file to be used in imageservices*
+
+                            //Choose max img size
+                            int maxImageSize = 500;
+
+                            //Set max size for thumbnails in pixels
+                            int maxThumbSize = 100;
+
+                            //Call ResizeImage() from ImageServices*
+                            ImageServices.ResizeImage(imgPath, imageName, convertedImage, maxImageSize, maxThumbSize);
+
+                        }
+                        else
+                        {
+                            //handle invalid file type somehow...
+                            imageName = "NoImage.jpg";
+                        }
+                    }
+
+                    //Regardless of whether a file was uploaded, set the image name on the db record (hijack record)
+                    model.BaristaImage = imageName;
+
+                    #endregion
+
+
                     #region Dealing with custom user details
                     UserDetail newUserDeets = new UserDetail();
                     newUserDeets.UserID = user.Id;

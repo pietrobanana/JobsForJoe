@@ -31,7 +31,8 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ResumeFileName)
+            @*@Html.DisplayFor(model => model.ResumeFileName)*@
+            <a href="@Url.Content("~/Content/Images/PDFS/" + Model.ResumeFileName)" target="_blank" class="btn btn-warning">Resume</a>
         </dd>
 
         <dt>
@@ -39,7 +40,8 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.BaristaImage)
+            @*@Html.DisplayFor(model => model.BaristaImage)*@
+            <img src="~/Content/Images/Users/@Model.BaristaImage" alt="@Model.FirstName + @Model.LastName" />
         </dd>
 
         <dt>

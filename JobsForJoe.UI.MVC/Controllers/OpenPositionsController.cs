@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using JobsForJoe.Data.EF;
 using Microsoft.AspNet.Identity;
+using JobsForJoe.UI.MVC.Models;
 
 namespace JobsForJoe.UI.MVC.Controllers
 {
@@ -101,9 +102,17 @@ namespace JobsForJoe.UI.MVC.Controllers
 
         public ActionResult Apply(int id)
         {
-            User.Identity.GetUserId();
-            db.OpenPositions.Add(OpenPosition);
-            return View();
+            string currentUserId = User.Identity.GetUserId();
+            UserDetail user = db.UserDetails.FirstOrDefault(x => x.UserID == currentUserId);
+            Application app = new Application();
+            app.UserID = user.UserID;
+            app.OpenPositionID = id;
+            app.ApplicationDate = new DateTime();
+            app.ResumeFilename = user.ResumeFileName;
+
+            db.Applications.Add(app);
+            db.SaveChanges();
+            return RedirectToAction("Index", "Applications");
         }
 
 

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using JobsForJoe.Data.EF;
+using JobsForJoe.UI.MVC.Models;
 
 namespace JobsForJoe.UI.MVC.Controllers
 {
@@ -15,7 +16,7 @@ namespace JobsForJoe.UI.MVC.Controllers
         private JobsForJoeEntities db = new JobsForJoeEntities();
 
         // GET: Applications
-        public ActionResult Index()
+        public ActionResult Index(OneClickApply model)
         {
             var applications = db.Applications.Include(a => a.OpenPosition);
             return View(applications.ToList());

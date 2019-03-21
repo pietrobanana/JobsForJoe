@@ -213,14 +213,32 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
+    <Compile Include="Models\ApplicationsViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ImageServices.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\PDFS\No-image-full.jpg" />
+    <Content Include="Content\Images\Users\4647a9d6-5360-4cb1-8e3a-681a8f41b9a8.jpg" />
+    <Content Include="Content\Images\Users\4a0315a5-4961-4d7b-b902-3a27e96f0beb.PNG" />
+    <Content Include="Content\Images\Users\5900edb9-4a67-4fe1-9913-a0ad3d45fb64.jpg" />
+    <Content Include="Content\Images\Users\772d8bea-9421-414a-a3e4-f219769e5649.jpg" />
+    <Content Include="Content\Images\Users\96698b90-92c7-490e-bc9c-fcef37a747d5.jpg" />
+    <Content Include="Content\Images\Users\d3bd9470-a470-44e5-bcb5-cb9e179bcf56.jpg" />
+    <Content Include="Content\Images\Users\da13675e-59a0-42f5-a712-53e8fb7f6cc6.PNG" />
+    <Content Include="Content\Images\Users\No-image-full.jpg" />
+    <Content Include="Content\Images\Users\t_4647a9d6-5360-4cb1-8e3a-681a8f41b9a8.jpg" />
+    <Content Include="Content\Images\Users\t_4a0315a5-4961-4d7b-b902-3a27e96f0beb.PNG" />
+    <Content Include="Content\Images\Users\t_5900edb9-4a67-4fe1-9913-a0ad3d45fb64.jpg" />
+    <Content Include="Content\Images\Users\t_772d8bea-9421-414a-a3e4-f219769e5649.jpg" />
+    <Content Include="Content\Images\Users\t_96698b90-92c7-490e-bc9c-fcef37a747d5.jpg" />
+    <Content Include="Content\Images\Users\t_d3bd9470-a470-44e5-bcb5-cb9e179bcf56.jpg" />
+    <Content Include="Content\Images\Users\t_da13675e-59a0-42f5-a712-53e8fb7f6cc6.PNG" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -232,6 +250,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Images\PDFS\noPDF.pdf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

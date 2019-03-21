@@ -45,7 +45,9 @@
             @Html.DisplayFor(modelItem => item.Location.State)
         </th>
         <td>
-            @Html.ActionLink("Apply", "Apply", item.OpenPositionID)
+            <button class="btn btn-info">
+                @Html.ActionLink("Apply", "Apply", new { id = item.OpenPositionID })
+            </button>
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.OpenPositionID }) |

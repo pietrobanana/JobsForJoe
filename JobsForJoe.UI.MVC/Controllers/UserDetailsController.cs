@@ -7,6 +7,9 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using JobsForJoe.Data.EF;
+using System.Drawing;
+using cStoreMVC.Doamin.Services;
+using Microsoft.AspNet.Identity;
 
 namespace JobsForJoe.UI.MVC.Controllers
 {
@@ -46,10 +49,87 @@ namespace JobsForJoe.UI.MVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserID,FirstName,LastName,ResumeFileName,BaristaImage,IsEmployed,Bio")] UserDetail userDetail)
+        public ActionResult Create([Bind(Include = "UserID,FirstName,LastName,ResumeFileName,BaristaImage,IsEmployed,Bio")] UserDetail userDetail, HttpPostedFileBase userPicture, HttpPostedFileBase resumeFile)
         {
             if (ModelState.IsValid)
             {
+                #region FILE UPLOAD (CREATE)
+                string resumeDoc = "noPDF.pdf";
+                if (resumeFile != null)
+                {
+                    //Find the extension
+                    resumeDoc = resumeFile.FileName;
+                    string imgExtension = resumeFile.FileName.Substring(resumeDoc.LastIndexOf("."));
+
+                    string[] goodExtensions = { ".pdf", ".docx", ".doc", ".dot", ".txt" };
+
+                    if (goodExtensions.Contains(imgExtension.ToLower()))
+                    {
+                        resumeDoc = User.Identity.GetUserId() + imgExtension;
+
+                        string savePath = Server.MapPath("~/Content/Resumes/");
+
+                        resumeFile.SaveAs(savePath + resumeDoc);
+                        resumeDoc = Guid.NewGuid() + imgExtension; // Create unique file name with a guid. 
+                    }
+                    else
+                    {
+                        //handle invalid file type somehow...
+                        resumeDoc = "noPDF.pdf";
+                    }
+                }
+
+                //Regardless of whether a file was uploaded, set the image name on the db record (hijack record)
+                userDetail.ResumeFileName = resumeDoc;
+
+                #endregion
+
+
+                #region FILE UPLOAD (CREATE) WITH IMAGE SERVICE
+                string imageName = "NoImage.jpg";
+                if (userPicture != null)
+                {
+                    //Find the extension
+                    imageName = userPicture.FileName;
+                    string imgExtension = userPicture.FileName.Substring(imageName.LastIndexOf("."));
+
+                    string[] goodExtensions = { ".jpg", ".jpeg", ".gif", ".png" };
+
+                    if (goodExtensions.Contains(imgExtension.ToLower()))
+                    {
+                        imageName = Guid.NewGuid() + imgExtension; // Create unique file name with a guid. 
+
+                        //Rather than save this file to the server directly, we'll use imageservice* to do it.
+                        //make 2 copies, main & thumbnail.
+
+                        //Lets make all the param that we need.
+                        string imgPath = Server.MapPath("~/Content/Images/Users/"); //Folder path.
+
+                        Image convertedImage = Image.FromStream(userPicture.InputStream); //Manipulates the file to be used in imageservices*
+
+                        //Choose max img size
+                        int maxImageSize = 500;
+
+                        //Set max size for thumbnails in pixels
+                        int maxThumbSize = 100;
+
+                        //Call ResizeImage() from ImageServices*
+                        ImageServices.ResizeImage(imgPath, imageName, convertedImage, maxImageSize, maxThumbSize);
+
+                    }
+                    else
+                    {
+                        //handle invalid file type somehow...
+                        imageName = "NoImage.jpg";
+                    }
+                }
+
+                //Regardless of whether a file was uploaded, set the image name on the db record (hijack record)
+                userDetail.BaristaImage = imageName;
+
+                #endregion
+
+
                 db.UserDetails.Add(userDetail);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -78,10 +158,91 @@ namespace JobsForJoe.UI.MVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserID,FirstName,LastName,ResumeFileName,BaristaImage,IsEmployed,Bio")] UserDetail userDetail)
+        public ActionResult Edit([Bind(Include = "UserID,FirstName,LastName,ResumeFileName,BaristaImage,IsEmployed,Bio")] UserDetail userDetail, HttpPostedFileBase userPicture, HttpPostedFileBase resumeFile)
         {
             if (ModelState.IsValid)
             {
+                #region FILE UPLOAD (Edit) WITH IMAGE SERVICE
+                //Took out the noimage default from the create. When the user edits it will not override the image that was uploaded by them.
+                if (resumeFile != null)
+                {
+                    //Find the extension
+                    //VARIATION FOR EDIT - VARIABLE DECLARATION HAPPENS HERE, ADD "STRING"DATATYPE
+                    string resumeDoc = resumeFile.FileName;
+                    string docExtension = resumeFile.FileName.Substring(resumeDoc.LastIndexOf("."));
+
+                    string[] goodExtensions = { ".jpg", ".jpeg", ".gif", ".png" };
+
+                    if (goodExtensions.Contains(docExtension.ToLower()))
+                    {
+                        resumeDoc = Guid.NewGuid() + docExtension; // Create unique file name with a guid. 
+
+                    }
+                    else
+                    {
+                        //handle invalid file type somehow...
+                        //VARIATION FOR EDIT -- JUST LEACE IT AT ORIGINAL FILE (HANDLED BY HIDDEN FIELD)
+                        //imageName = "NoImage.jpg";
+                    }
+                    //VARIATION FOR EDIT-- MOVED RECORD HIJACK FOR BOOKIMAGE FIELD ASSIGNMENT TO HAPPEN ONLY IF USER UPLOADED A FILE.
+                    userDetail.ResumeFileName = resumeDoc;
+                }
+
+
+
+
+                #endregion
+
+
+                #region FILE UPLOAD (Edit) WITH IMAGE SERVICE
+                //Took out the noimage default from the create. When the user edits it will not override the image that was uploaded by them.
+                if (userPicture != null)
+                {
+                    //Find the extension
+                    //VARIATION FOR EDIT - VARIABLE DECLARATION HAPPENS HERE, ADD "STRING"DATATYPE
+                    string imageName = userPicture.FileName;
+                    string imgExtension = userPicture.FileName.Substring(imageName.LastIndexOf("."));
+
+                    string[] goodExtensions = { ".jpg", ".jpeg", ".gif", ".png" };
+
+                    if (goodExtensions.Contains(imgExtension.ToLower()))
+                    {
+                        imageName = Guid.NewGuid() + imgExtension; // Create unique file name with a guid. 
+
+                        //Rather than save this file to the server directly, we'll use imageservice* to do it.
+                        //make 2 copies, main & thumbnail.
+
+                        //Lets make all the param that we need.
+                        string imgPath = Server.MapPath("~/Content/Images/Users/"); //Folder path.
+
+                        Image convertedImage = Image.FromStream(userPicture.InputStream); //Manipulates the file to be used in imageservices*
+
+                        //Choose max img size
+                        int maxImageSize = 500;
+
+                        //Set max size for thumbnails in pixels
+                        int maxThumbSize = 100;
+
+                        //Call ResizeImage() from ImageServices*
+                        ImageServices.ResizeImage(imgPath, imageName, convertedImage, maxImageSize, maxThumbSize);
+
+                    }
+                    else
+                    {
+                        //handle invalid file type somehow...
+                        //VARIATION FOR EDIT -- JUST LEACE IT AT ORIGINAL FILE (HANDLED BY HIDDEN FIELD)
+                        //imageName = "NoImage.jpg";
+                    }
+                    //VARIATION FOR EDIT-- MOVED RECORD HIJACK FOR BOOKIMAGE FIELD ASSIGNMENT TO HAPPEN ONLY IF USER UPLOADED A FILE.
+                    userDetail.BaristaImage = imageName;
+                }
+
+
+
+
+                #endregion
+                //var UserId = User.Identity.GetUserId();
+                //userDetail.UserID = UserId;
                 db.Entry(userDetail).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
