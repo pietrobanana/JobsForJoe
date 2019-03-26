@@ -1,4 +1,6 @@
 ﻿@model JobsForJoe.Data.EF.Location
+@using Microsoft.AspNet.Identity
+@using JobsForJoe.Data.EF
 
 @{
     ViewBag.Title = "Details";
@@ -47,7 +49,16 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ManagerID)
+            @*@Html.DisplayFor(model => model.ManagerID)*@
+            @foreach (UserDetail user in ViewBag.UserDetails)
+            {
+                if (Model.ManagerID == user.UserID)
+                {
+
+                        @user.FirstName @user.LastName
+                    
+                }
+            }
         </dd>
 
         <dt>
@@ -61,6 +72,10 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.LocationID }) |
+    @if (User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.LocationID }) @:|
+    }
+     
     @Html.ActionLink("Back to List", "Index")
 </p>

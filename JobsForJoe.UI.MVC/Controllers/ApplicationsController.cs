@@ -8,9 +8,11 @@ using System.Web;
 using System.Web.Mvc;
 using JobsForJoe.Data.EF;
 using JobsForJoe.UI.MVC.Models;
+using Microsoft.AspNet.Identity;
 
 namespace JobsForJoe.UI.MVC.Controllers
 {
+    [Authorize(Roles = "Admin,Store Manager, Employee")]
     public class ApplicationsController : Controller
     {
         private JobsForJoeEntities db = new JobsForJoeEntities();
@@ -18,8 +20,27 @@ namespace JobsForJoe.UI.MVC.Controllers
         // GET: Applications
         public ActionResult Index(OneClickApply model)
         {
-            var applications = db.Applications.Include(a => a.OpenPosition);
-            return View(applications.ToList());
+            //var applications = db.Applications.Include(a => a.OpenPosition);
+            //return View(applications.ToList());
+            //User is only able to 
+
+            List<UserDetail> deets = db.UserDetails.ToList();
+            ViewBag.UserDetails = deets;
+
+            if (User.IsInRole("Admin"))
+            {
+                var applications = db.Applications.Include(a => a.OpenPosition);
+                return View(applications.ToList());
+            }
+            else
+            {
+                string currentUserId = User.Identity.GetUserId();
+                return View(db.Applications.Where(x => x.UserID == currentUserId));
+            }
+
+
+            
+            
         }
 
         // GET: Applications/Details/5

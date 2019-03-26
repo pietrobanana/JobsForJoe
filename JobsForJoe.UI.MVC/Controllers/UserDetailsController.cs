@@ -20,7 +20,9 @@ namespace JobsForJoe.UI.MVC.Controllers
         // GET: UserDetails
         public ActionResult Index()
         {
-            return View(db.UserDetails.ToList());
+            string currentUserId = User.Identity.GetUserId();
+            return View(db.UserDetails.Where(x => x.UserID == currentUserId));
+            //return View(db.UserDetails.ToList());
         }
 
         // GET: UserDetails/Details/5
@@ -53,7 +55,7 @@ namespace JobsForJoe.UI.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                #region FILE UPLOAD (CREATE)
+                #region Resume FILE UPLOAD (CREATE)
                 string resumeDoc = "noPDF.pdf";
                 if (resumeFile != null)
                 {
@@ -65,12 +67,13 @@ namespace JobsForJoe.UI.MVC.Controllers
 
                     if (goodExtensions.Contains(imgExtension.ToLower()))
                     {
-                        resumeDoc = User.Identity.GetUserId() + imgExtension;
+                        //resumeDoc = User.Identity.GetUserId() + imgExtension;
 
-                        string savePath = Server.MapPath("~/Content/Resumes/");
+                        //string savePath = Server.MapPath("~/Content/Images/PDFS/");
 
-                        resumeFile.SaveAs(savePath + resumeDoc);
-                        resumeDoc = Guid.NewGuid() + imgExtension; // Create unique file name with a guid. 
+                        //resumeFile.SaveAs(savePath + resumeDoc);
+                        //resumeDoc = Guid.NewGuid() + imgExtension; // Create unique file name with a guid. 
+                        resumeFile.SaveAs(Server.MapPath("~/Content/Images/PDFS/" + resumeDoc));
                     }
                     else
                     {
@@ -169,23 +172,25 @@ namespace JobsForJoe.UI.MVC.Controllers
                     //Find the extension
                     //VARIATION FOR EDIT - VARIABLE DECLARATION HAPPENS HERE, ADD "STRING"DATATYPE
                     string resumeDoc = resumeFile.FileName;
-                    string docExtension = resumeFile.FileName.Substring(resumeDoc.LastIndexOf("."));
+                    string docExtension = resumeDoc.Substring(resumeDoc.LastIndexOf("."));
 
-                    string[] goodExtensions = { ".jpg", ".jpeg", ".gif", ".png" };
+                    string[] goodExtensions = { ".pdf", ".docx", ".doc", ".dot", ".txt" };
 
                     if (goodExtensions.Contains(docExtension.ToLower()))
                     {
-                        resumeDoc = Guid.NewGuid() + docExtension; // Create unique file name with a guid. 
-
+                        //resumeDoc = Guid.NewGuid() + docExtension; // Create unique file name with a guid. 
+                        //string resPath = Server.MapPath("~/Content/Images/PDFS/"); //Folder path.
+                        resumeFile.SaveAs(Server.MapPath("~/Content/Images/PDFS/" + resumeDoc));
+                        userDetail.ResumeFileName = resumeDoc;
                     }
-                    else
-                    {
-                        //handle invalid file type somehow...
-                        //VARIATION FOR EDIT -- JUST LEACE IT AT ORIGINAL FILE (HANDLED BY HIDDEN FIELD)
-                        //imageName = "NoImage.jpg";
-                    }
+                    //else
+                    //{
+                    //    //handle invalid file type somehow...
+                    //    //VARIATION FOR EDIT -- JUST LEACE IT AT ORIGINAL FILE (HANDLED BY HIDDEN FIELD)
+                    //    //imageName = "NoImage.jpg";
+                    //}
                     //VARIATION FOR EDIT-- MOVED RECORD HIJACK FOR BOOKIMAGE FIELD ASSIGNMENT TO HAPPEN ONLY IF USER UPLOADED A FILE.
-                    userDetail.ResumeFileName = resumeDoc;
+                    
                 }
 
 

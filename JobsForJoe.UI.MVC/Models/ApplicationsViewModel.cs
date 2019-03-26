@@ -11,7 +11,9 @@ namespace JobsForJoe.UI.MVC.Models
         [Required]
         public int OpenPositionID { get; set; }
         [Required]
-        public string UserID { get; set; }        [Required]        public DateTime ApplicationDate { get; set; }
+        public string UserID { get; set; }
+        [Required]
+        public DateTime ApplicationDate { get; set; }
         public string ManagerNotes { get; set; }
         public string BaristaImage { get; set; }
         [Required]

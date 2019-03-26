@@ -6,9 +6,13 @@
 
 <h2>@ViewBag.Title</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
+
 <table class="table">
     <tr>
         <th>
@@ -23,9 +27,14 @@
         <th>
             @Html.DisplayNameFor(model => model.BaristaImage)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsEmployed)
-        </th>
+
+        @if (User.IsInRole("Admin"))
+        {
+            <th>
+                @Html.DisplayNameFor(model => model.IsEmployed)
+            </th>
+        }
+        
         <th>
             @Html.DisplayNameFor(model => model.Bio)
         </th>
@@ -42,15 +51,21 @@
         </td>
         <td>
             @*@Html.DisplayFor(modelItem => item.ResumeFileName)*@
-            <a href="@Url.Content("~/Content/Images/PDFS/" + item.ResumeFileName)" target="_blank" class="btn btn-warning">Resume</a>
+            @*<a class="btn btn-primary btn-round" href="@Url.Content("~/Content/Images/PDFS/" + item.ResumeFileName)" target="_blank" >Resume</a>*@
+            <a class="btn btn-primary btn-round" href="@Url.Content("~/Content/Images/PDFS/" + item.ResumeFileName)" target="_blank">Resume</a>
         </td>
         <td>
             @*@Html.DisplayFor(modelItem => item.BaristaImage)*@
             <img src="~/Content/Images/Users/t_@item.BaristaImage" alt="@item.FirstName @item.LastName" />
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsEmployed)
-        </td>
+        
+        @if (User.IsInRole("Admin"))
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.IsEmployed)
+            </td>
+        }
+        
         <td>
             @Html.DisplayFor(modelItem => item.Bio)
         </td>

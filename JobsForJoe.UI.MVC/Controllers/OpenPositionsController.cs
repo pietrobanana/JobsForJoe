@@ -12,6 +12,7 @@ using JobsForJoe.UI.MVC.Models;
 
 namespace JobsForJoe.UI.MVC.Controllers
 {
+    [Authorize(Roles =("Admin, Store Manager, Employee"))]
     public class OpenPositionsController : Controller
     {
         private JobsForJoeEntities db = new JobsForJoeEntities();
@@ -19,8 +20,86 @@ namespace JobsForJoe.UI.MVC.Controllers
         // GET: OpenPositions
         public ActionResult Index()
         {
+            //if (User.IsInRole("Employee"))
+            //{
+            //    UserDetail user = new UserDetail();
+            //    //Getting applications with the same resume on file as the current user.
+            //    var apps = db.Applications.Where(m => m.ResumeFilename == user.ResumeFileName);
+
+            //    //Gets all open positions.
+            //    var ops = db.OpenPositions.Include(o => o.Location).Include(o => o.Position);
+
+            //    //Create a list to put all the open positions the employee has applied for.
+            //    List<int> appliedOpenPositions = new List<int>();
+
+            //    //Loops through each of the users applications
+            //    foreach (var item in apps)
+            //    {
+            //        //Loops throuhg all open positions 
+            //        foreach (var op in ops)
+            //        {
+            //            //If the OpenPositionId and the OpenPositionID on the resume match, add it to the list above.
+            //            if (item.OpenPositionID == op.OpenPositionID)
+            //            {
+            //                appliedOpenPositions.Add(op.OpenPositionID);
+            //            }
+            //        }
+            //    }
+
+            //    //Adds a list to the ViewBag to show in the View.
+            //    ViewBag.AppliedOP = appliedOpenPositions;
+            //}
+            //return View();
+
             var openPositions = db.OpenPositions.Include(o => o.Location).Include(o => o.Position);
-            return View(openPositions.ToList());
+            string currentUserId = User.Identity.GetUserId();
+
+            UserDetail user = db.UserDetails.FirstOrDefault(x => x.UserID == currentUserId);
+            if (User.IsInRole("Employee") || (User.IsInRole("Admin")))
+            {
+                if (User.IsInRole("Employee"))
+                {
+                    //UserDetail deets = new UserDetail();
+                    //Getting applications with the same resume on file as the current user.
+                    var apps = db.Applications.Where(m => m.ResumeFilename == user.ResumeFileName);
+
+                    //Gets all open positions.
+                    var ops = db.OpenPositions.Include(o => o.Location).Include(o => o.Position);
+
+                    //Create a list to put all the open positions the employee has applied for.
+                    List<int> appliedOpenPositions = new List<int>();
+
+                    //Loops through each of the users applications
+                    foreach (var item in apps)
+                    {
+                        //Loops throuhg all open positions 
+                        foreach (var op in ops)
+                        {
+                            //If the OpenPositionId and the OpenPositionID on the resume match, add it to the list above.
+                            if (item.OpenPositionID == op.OpenPositionID)
+                            {
+                                appliedOpenPositions.Add(op.OpenPositionID);
+                            }
+                        }
+                    }
+
+                    //Adds a list to the ViewBag to show in the View.
+                    ViewBag.AppliedOP = appliedOpenPositions;
+
+
+
+                }
+
+                return View(openPositions.ToList());
+            }
+            else
+            {
+                var locationIDs = db.Locations.Where(l => l.ManagerID == currentUserId).Select(l => l.LocationID);
+                var opList = db.OpenPositions.Where(op => locationIDs.Contains(op.LocationID)).ToList();
+                return View(opList.ToList());
+            }
+
+
         }
 
         // GET: OpenPositions/Details/5
@@ -41,9 +120,21 @@ namespace JobsForJoe.UI.MVC.Controllers
         // GET: OpenPositions/Create
         public ActionResult Create()
         {
-            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "StoreName");
+            if (User.IsInRole("Admin"))
+            { 
+            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "LocationID");
+            ViewBag.PositionID = new SelectList(db.Positions, "PositionID", "PositionID");
+            return View();
+            }
+
+            else
+            {
+            string currentUserId = User.Identity.GetUserId();
+            ViewBag.LocationID = new SelectList(db.Locations.Where(model => model.ManagerID == currentUserId), "LocationID", "StoreName");
             ViewBag.PositionID = new SelectList(db.Positions, "PositionID", "Title");
             return View();
+            }
+
         }
 
         // POST: OpenPositions/Create
@@ -54,7 +145,7 @@ namespace JobsForJoe.UI.MVC.Controllers
         public ActionResult Create([Bind(Include = "OpenPositionID,PositionID,LocationID")] OpenPosition openPosition)
         {
             if (ModelState.IsValid)
-            {
+            { 
                 db.OpenPositions.Add(openPosition);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -107,14 +198,14 @@ namespace JobsForJoe.UI.MVC.Controllers
             Application app = new Application();
             app.UserID = user.UserID;
             app.OpenPositionID = id;
-            app.ApplicationDate = new DateTime();
+            app.ApplicationDate = DateTime.Now;
             app.ResumeFilename = user.ResumeFileName;
 
+            
             db.Applications.Add(app);
             db.SaveChanges();
             return RedirectToAction("Index", "Applications");
         }
-
 
 
 

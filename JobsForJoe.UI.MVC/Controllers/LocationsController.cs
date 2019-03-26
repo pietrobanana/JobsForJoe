@@ -7,9 +7,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using JobsForJoe.Data.EF;
+using Microsoft.AspNet.Identity;
 
 namespace JobsForJoe.UI.MVC.Controllers
 {
+    [Authorize(Roles = ("Admin, Store Manager"))]
     public class LocationsController : Controller
     {
         private JobsForJoeEntities db = new JobsForJoeEntities();
@@ -17,12 +19,29 @@ namespace JobsForJoe.UI.MVC.Controllers
         // GET: Locations
         public ActionResult Index()
         {
-            return View(db.Locations.ToList());
+            List<UserDetail> deets = db.UserDetails.ToList();
+            ViewBag.UserDetails = deets;
+
+            if (User.IsInRole("Admin"))
+            {
+                return View(db.Locations.ToList());
+            }
+            else
+            {
+                string currentUserId = User.Identity.GetUserId();
+                return View(db.Locations.Where(x => x.ManagerID == currentUserId));
+            }
+
+            
+            //return View(db.Locations.ToList());
         }
 
         // GET: Locations/Details/5
         public ActionResult Details(int? id)
         {
+            List<UserDetail> deets = db.UserDetails.ToList();
+            ViewBag.UserDetails = deets;
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

@@ -1,4 +1,8 @@
 ﻿@model IEnumerable<JobsForJoe.Data.EF.OpenPosition>
+@using Microsoft.AspNet.Identity
+
+
+
 
 @{
     ViewBag.Title = "Open Positions";
@@ -6,9 +10,13 @@
 
 <h2>@ViewBag.Title</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
+
 <table class="table">
     <tr>
         <th>
@@ -22,10 +30,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Location.State)
-        </th>
-        
-        <th>
-            <p>Apply</p>
         </th>
         <th></th>
     </tr>
@@ -45,14 +49,41 @@
             @Html.DisplayFor(modelItem => item.Location.State)
         </th>
         <td>
-            <button class="btn btn-info">
-                @Html.ActionLink("Apply", "Apply", new { id = item.OpenPositionID })
-            </button>
+            @if (User.Identity.IsAuthenticated)
+            {
+                if (ViewBag.AppliedOP != null )
+                {
+                    if (ViewBag.AppliedOP.Contains(item.OpenPositionID))
+                    {
+                        <i class="material-icons">done_outline</i>
+                    }
+                    else
+                    {
+                        <button class="btn btn-info">
+                            @Html.ActionLink("Apply", "Apply", new { id = item.OpenPositionID })
+                        </button>
+                    }
+                }
+            }
+            else
+            {
+                @Html.ActionLink("Upload Resume", "Edit", "UserDetails", new { id = User.Identity.GetUserId() }, null)
+            }
+
+
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.OpenPositionID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.OpenPositionID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.OpenPositionID })
+            @if (User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("Edit", "Edit", new { id = item.OpenPositionID }) @:|
+            }
+            
+            @Html.ActionLink("Details", "Details", new { id=item.OpenPositionID }) 
+            @if (User.IsInRole("Admin"))
+            {
+               @:| @Html.ActionLink("Delete", "Delete", new { id = item.OpenPositionID })
+            }
+            
         </td>
     </tr>
 }

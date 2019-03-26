@@ -1,14 +1,19 @@
 ﻿@model IEnumerable<JobsForJoe.Data.EF.Location>
-
+@using Microsoft.AspNet.Identity
+@using JobsForJoe.Data.EF
 @{
     ViewBag.Title = "Store Locations";
 }
 
 <h2>@ViewBag.Title</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@if (User.IsInRole("Admin"))
+{
+    <p class="btn">
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
+
 <table class="table">
     <tr>
         <th>
@@ -26,9 +31,9 @@
         <th>
             @Html.DisplayNameFor(model => model.ManagerID)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.StoreImage)
-        </th>
+        </th>*@
         <th></th>
     </tr>
 
@@ -47,11 +52,20 @@
             @Html.DisplayFor(modelItem => item.State)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ManagerID)
+           @* @Html.DisplayFor(modelItem => item.ManagerID)*@
+           @foreach (UserDetail user in ViewBag.UserDetails)
+                {
+                    if (item.ManagerID == user.UserID)
+                    {
+                    <p>
+                        @user.FirstName @user.LastName
+                    </p>
+                }
+            }
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.StoreImage)
-        </td>
+        </td>*@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.LocationID }) |
             @Html.ActionLink("Details", "Details", new { id=item.LocationID }) |

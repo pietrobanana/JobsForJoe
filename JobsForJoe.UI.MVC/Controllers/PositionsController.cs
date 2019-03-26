@@ -7,9 +7,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using JobsForJoe.Data.EF;
+using Microsoft.AspNet.Identity;
 
 namespace JobsForJoe.UI.MVC.Controllers
 {
+    [Authorize(Roles =("Admin"))]
     public class PositionsController : Controller
     {
         private JobsForJoeEntities db = new JobsForJoeEntities();
@@ -17,7 +19,14 @@ namespace JobsForJoe.UI.MVC.Controllers
         // GET: Positions
         public ActionResult Index()
         {
-            return View(db.Positions.ToList());
+            if (User.IsInRole("Admin"))
+            {
+                return View(db.Positions.ToList());
+            }
+            else
+            {
+                return HttpNotFound();
+            }
         }
 
         // GET: Positions/Details/5

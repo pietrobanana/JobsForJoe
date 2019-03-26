@@ -16,7 +16,7 @@ namespace JobsForJoe.Data.EF//.Metadata
         public int LocationID { get; set; }
 
         [Required(ErrorMessage = "***Please Provide Store Name***")]
-        [Display(Name = "Store Name")]
+        [Display(Name = "Store")]
         public string StoreName { get; set; }
 
         [Required(ErrorMessage = "***Please Provide Store Number***")]
@@ -24,15 +24,15 @@ namespace JobsForJoe.Data.EF//.Metadata
         public string StoreNumber { get; set; }
 
         [Required(ErrorMessage = "***Please Provide City Name***")]
-        [Display(Name = "City Name")]
+        [Display(Name = "City")]
         public string City { get; set; }
 
         [Required(ErrorMessage = "***Please Provide State Name***")]
-        [Display(Name = "State Name")]
+        [Display(Name = "State")]
         public string State { get; set; }
 
         [Required(ErrorMessage = "***Please Provide Manager***")]
-        [Display(Name = "Manager Name")]
+        [Display(Name = "Manager")]
         public string ManagerID { get; set; }
 
         [Display(Name = "Store Image")]

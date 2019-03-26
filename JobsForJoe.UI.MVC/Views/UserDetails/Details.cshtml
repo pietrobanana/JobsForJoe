@@ -6,7 +6,126 @@
 
 <h2>Details</h2>
 
-<div>
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <!--<div class="col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title">Profile Summary</h4>
+                        @*<p class="card-category">Complete your profile</p>*@
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <div class="row">
+                                @*<div class="col-md-5">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">Company (disabled)</label>
+                                        <input type="text" class="form-control" disabled>
+                                    </div>
+                                </div>*@
+                                @*<div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">Username</label>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>*@
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">Email address</label>
+                                        <input type="email" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">@Model.FirstName</label>
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">@Model.LastName</label>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            @*<div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">Adress</label>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>*@
+                            @*<div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">@Model.Ci</label>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">Country</label>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">Postal Code</label>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>*@
+                            @*<div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>About Me</label>
+                                        <div class="form-group">
+                                            <label class="bmd-label-floating"> Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</label>
+                                            <textarea class="form-control" rows="5"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary pull-right">Update Profile</button>
+                            <div class="clearfix"></div>*@
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+
+            <!--PROFILE-->
+            <div class="col-md-12">
+                <div class="card card-profile">
+                    <div class="card-avatar">
+                        <a href="#pablo">
+                            <img src="~/Content/Images/Users/@Model.BaristaImage" alt="@Model.FirstName + @Model.LastName" />
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-category">Here to serve</h6>
+                        <h4 class="card-title">
+                            @Model.FirstName @Model.LastName
+                        </h4>
+                        <p class="card-description">
+                            @Model.Bio
+                        </p>
+                        @*<a href="#pablo" class="btn btn-primary btn-round">Follow</a>*@
+                        <a class="btn btn-primary btn-round" href="@Url.Content("~/Content/Images/PDFS/" + Model.ResumeFileName)" target="_blank">Resume</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--<div>
     <h4>UserDetail</h4>
     <hr />
     <dl class="dl-horizontal">
@@ -61,8 +180,10 @@
         </dd>
 
     </dl>
-</div>
+</div>-->
 <p>
+    @*<a class="btn btn-secondary btn-round" href="@Url.Action("Edit","UserDetails", new { id = Model.UserID})">Edit</a>*@
     @Html.ActionLink("Edit", "Edit", new { id = Model.UserID }) |
+    @*<a class="btn btn-secondary btn-round" href="@Url.Action("Index","UserDetails", new { id = Model.UserID})">Back to List</a>*@
     @Html.ActionLink("Back to List", "Index")
 </p>

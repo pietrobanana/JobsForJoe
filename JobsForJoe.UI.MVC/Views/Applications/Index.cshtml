@@ -1,63 +1,102 @@
 ﻿@model IEnumerable<JobsForJoe.Data.EF.Application>
+@using Microsoft.AspNet.Identity
+@using JobsForJoe.Data.EF
 
 @{
-    ViewBag.Title = "Applications";
+    JobsForJoeEntities db = new JobsForJoeEntities();
+    string userId = User.Identity.GetUserId();
+    UserDetail deets = db.UserDetails.Where(u => u.UserID == userId).SingleOrDefault();
+    ViewBag.Title =   "Applications for " + User.Identity.Name ;
+    var fullName = deets.FirstName + " " + deets.LastName;
 }
 
-<h2>ViewBag.Title</h2>
+<h2>@ViewBag.Title</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
+
 <table class="table">
     <tr>
-        <th>
+        <th id="applicant">
             @Html.DisplayNameFor(model => model.UserID)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ApplicationDate)
         </th>
+        
+        @if (User.IsInRole("Admin, Store Manager"))
+        {
         <th>
             @Html.DisplayNameFor(model => model.ManagerNotes)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.IsDeclined)
         </th>
+        }
         <th>
             @Html.DisplayNameFor(model => model.ResumeFilename)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OpenPosition.OpenPositionID)
-        </th>
+        @if (User.IsInRole("Admin, Store Manager"))
+        {
+            <th>
+                @Html.DisplayNameFor(model => model.OpenPosition.OpenPositionID)
+            </th>
+        }
+        
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ApplicationDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ManagerNotes)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsDeclined)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ResumeFilename)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OpenPosition.OpenPositionID)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ApplicationsID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ApplicationsID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ApplicationsID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.UserID)*@
+                @foreach (UserDetail user in ViewBag.UserDetails)
+                {
+                    if (item.UserID == user.UserID)
+                    {
+                        <p>
+                            @user.FirstName @user.LastName
+                        </p>
+                    }
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApplicationDate)
+            </td>
+            
+            <td>
+                <a class="btn btn-primary btn-round" href="@Url.Content("~/Content/Images/PDFS/" + item.ResumeFilename)" target="_blank">Resume</a>
+            </td>
+            @if (User.IsInRole("Admin, Store Manager"))
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.ManagerNotes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsDeclined)
+                </td>
+            }
+            
+            
+            
+            @if (User.IsInRole("Admin, Store Manager"))
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.OpenPosition.OpenPositionID)
+                </td>
+            }
+            
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ApplicationsID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ApplicationsID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ApplicationsID })
+            </td>
+        </tr>
+    }
 
 </table>

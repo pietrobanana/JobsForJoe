@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JobsForJoe.Data//.EF.Metadata
+namespace JobsForJoe.Data.EF//.Metadata
 {
     [MetadataType(typeof(UserDetailMetadata))]
     public partial class UserDetail { }
@@ -23,17 +23,17 @@ namespace JobsForJoe.Data//.EF.Metadata
         public string LastName { get; set; }
 
         //[Required(ErrorMessage = "***Please enter your Resume File***")]
-        [Display(Name = "Personal Resume")]
+        [Display(Name = "Resume")]
         public string ResumeFileName { get; set; }
 
         [Display(Name = "Picture")]
         public string BaristaImage { get; set; }
 
         [Required(ErrorMessage = "***Please state if you are employed***")]
-        [Display(Name = "Are you currently Employed with this company?")]
+        [Display(Name = "Employed")]
         public bool IsEmployed { get; set; }
 
-        [Display(Name = "Tell us a little about yourself")]
+        [Display(Name = "Bio")]
         [UIHint("Multiline")]
         public string Bio { get; set; }
     }

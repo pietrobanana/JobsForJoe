@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JobsForJoe.Data.EF.Metadata
+namespace JobsForJoe.Data.EF//.Metadata
 {
     [MetadataType(typeof(ApplicationMetadata))]
     public partial class Application { }
@@ -23,7 +23,7 @@ namespace JobsForJoe.Data.EF.Metadata
 
         [Required(ErrorMessage = "***Please Enter Date needed***")]
         [Display(Name = "Application Date")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
+        [DisplayFormat(DataFormatString = "{0:d}")]
         public System.DateTime ApplicationDate { get; set; }
 
         [Display(Name ="Manager Notes")]

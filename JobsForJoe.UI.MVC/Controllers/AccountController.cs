@@ -149,7 +149,7 @@ namespace JobsForJoe.UI.MVC.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model, HttpPostedFileBase userPicture)
+        public async Task<ActionResult> Register(RegisterViewModel model, HttpPostedFileBase userPicture, HttpPostedFileBase resumeFile)
         {
             if (ModelState.IsValid)
             {
@@ -157,6 +157,39 @@ namespace JobsForJoe.UI.MVC.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    #region Resume FILE UPLOAD (CREATE)
+                    string resumeDoc = "noPDF.pdf";
+                    if (resumeFile != null)
+                    {
+                        //Find the extension
+                        resumeDoc = resumeFile.FileName;
+                        string imgExtension = resumeFile.FileName.Substring(resumeDoc.LastIndexOf("."));
+
+                        string[] goodExtensions = { ".pdf", ".docx", ".doc", ".dot", ".txt" };
+
+                        if (goodExtensions.Contains(imgExtension.ToLower()))
+                        {
+                            //resumeDoc = User.Identity.GetUserId() + imgExtension;
+
+                            //string savePath = Server.MapPath("~/Content/Images/PDFS/");
+
+                            //resumeFile.SaveAs(savePath + resumeDoc);
+                            //resumeDoc = Guid.NewGuid() + imgExtension; // Create unique file name with a guid. 
+                            resumeFile.SaveAs(Server.MapPath("~/Content/Images/PDFS/" + resumeDoc));
+                        }
+                        else
+                        {
+                            //handle invalid file type somehow...
+                            resumeDoc = "noPDF.pdf";
+                        }
+                    }
+
+                    //Regardless of whether a file was uploaded, set the image name on the db record (hijack record)
+                    model.ResumeFileName = resumeDoc;
+
+                    #endregion
+
+
                     #region FILE UPLOAD (CREATE) WITH IMAGE SERVICE
                     string imageName = "NoImage.jpg";
                     if (userPicture != null)
@@ -215,12 +248,14 @@ namespace JobsForJoe.UI.MVC.Controllers
                     db.UserDetails.Add(newUserDeets);
                     db.SaveChanges();
                     #endregion
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                    var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
-                    ViewBag.Link = callbackUrl;
-                    return View("DisplayEmail");
+                    //var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
+                    //ViewBag.Link = callbackUrl;
+                    //return View("DisplayEmail");
+                    return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }
