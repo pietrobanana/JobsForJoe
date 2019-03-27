@@ -87,6 +87,7 @@
       <End Role="OpenPosition" EntitySet="OpenPositions" />
       <End Role="Application" EntitySet="Applications" />
     </AssociationSet>
+    <EntitySet Name="AspNetUserRoles" EntityType="JobsForJoeModel.AspNetUserRole" />
   </EntityContainer>
   <EntityType Name="Application">
     <Key>
@@ -113,4 +114,12 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="AspNetUserRole">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="RoleId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+  </EntityType>
 </Schema>

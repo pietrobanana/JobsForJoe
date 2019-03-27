@@ -227,7 +227,9 @@
     <Content Include="Content\assets\demo\demo.css" />
     <Content Include="Content\assets\demo\demo.js" />
     <Content Include="Content\assets\img\apple-icon.png" />
+    <Content Include="Content\assets\img\coffav.png" />
     <Content Include="Content\assets\img\cover.jpg" />
+    <Content Include="Content\assets\img\f27580c41fc107ad4496ac6d8c9685e8.jpg" />
     <Content Include="Content\assets\img\faces\avatar.jpg" />
     <Content Include="Content\assets\img\faces\card-profile1-square.jpg" />
     <Content Include="Content\assets\img\faces\card-profile2-square.jpg" />
@@ -239,6 +241,7 @@
     <Content Include="Content\assets\img\sidebar-2.jpg" />
     <Content Include="Content\assets\img\sidebar-3.jpg" />
     <Content Include="Content\assets\img\sidebar-4.jpg" />
+    <Content Include="Content\assets\img\tazza-coffee-daily-logo-6.jpg" />
     <Content Include="Content\assets\js\core\bootstrap-material-design.min.js" />
     <Content Include="Content\assets\js\core\jquery.min.js" />
     <Content Include="Content\assets\js\core\popper.min.js" />
@@ -260,6 +263,16 @@
     <Content Include="Content\examples\user.html" />
     <Content Include="Content\gulpfile.js" />
     <Content Include="Content\Images\PDFS\No-image-full.jpg" />
+    <Content Include="Content\Images\Site\carpentercollective_icons_tadcarpenter.jpg" />
+    <Content Include="Content\Images\Site\f27580c41fc107ad4496ac6d8c9685e8.jpg" />
+    <Content Include="Content\Images\Site\index-image.jpg" />
+    <Content Include="Content\Images\Site\logocoffee.jpg" />
+    <Content Include="Content\Images\Site\logo_wip_tadcarpenter-02.jpg" />
+    <Content Include="Content\Images\Site\messenger.png" />
+    <Content Include="Content\Images\Site\MidtownFS.jpg" />
+    <Content Include="Content\Images\Site\MissionFS.jpg" />
+    <Content Include="Content\Images\Site\tazza.jpg" />
+    <Content Include="Content\Images\Site\WestportFS.jpg" />
     <Content Include="Content\Images\Users\4647a9d6-5360-4cb1-8e3a-681a8f41b9a8.jpg" />
     <Content Include="Content\Images\Users\4a0315a5-4961-4d7b-b902-3a27e96f0beb.PNG" />
     <Content Include="Content\Images\Users\5900edb9-4a67-4fe1-9913-a0ad3d45fb64.jpg" />

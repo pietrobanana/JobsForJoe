@@ -55,8 +55,30 @@ namespace JobsForJoe.UI.MVC.Controllers
         }
 
         // GET: Locations/Create
+        [Authorize(Roles ="Admin")]
         public ActionResult Create()
         {
+            //Gets all UserIDS in the role of Store MAnager
+            var managerRole = db.AspNetUserRoles.Where(m => m.RoleId == "52135fa2-3c96-4562-af11-5c4742af7d1a");
+
+            //Create a list to eventually add managers to
+            List<UserDetail> managers = new List<UserDetail>();
+
+            //Loops through all user in the UserDetail table.
+            foreach (UserDetail user in db.UserDetails)
+            {
+                //Loops through all ids in the managerRole variable
+                foreach (var manager in managerRole)
+                {
+                    if (user.UserID == manager.UserId)
+                    {
+                        managers.Add(user);
+                    }
+                }
+            }
+
+            //Creates a SelectList for the Create View of Full Names of all Managers
+            ViewBag.ManagerID = new SelectList(managers, "UserID", "FirstName");
             return View();
         }
 
@@ -69,6 +91,7 @@ namespace JobsForJoe.UI.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 db.Locations.Add(location);
                 db.SaveChanges();
                 return RedirectToAction("Index");

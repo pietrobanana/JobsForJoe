@@ -151,6 +151,9 @@
     <Compile Include="Application.cs">
       <DependentUpon>JobsForJoeModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="AspNetUserRole.cs">
+      <DependentUpon>JobsForJoeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="JobsForJoeModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -20,37 +20,6 @@ namespace JobsForJoe.UI.MVC.Controllers
         // GET: OpenPositions
         public ActionResult Index()
         {
-            //if (User.IsInRole("Employee"))
-            //{
-            //    UserDetail user = new UserDetail();
-            //    //Getting applications with the same resume on file as the current user.
-            //    var apps = db.Applications.Where(m => m.ResumeFilename == user.ResumeFileName);
-
-            //    //Gets all open positions.
-            //    var ops = db.OpenPositions.Include(o => o.Location).Include(o => o.Position);
-
-            //    //Create a list to put all the open positions the employee has applied for.
-            //    List<int> appliedOpenPositions = new List<int>();
-
-            //    //Loops through each of the users applications
-            //    foreach (var item in apps)
-            //    {
-            //        //Loops throuhg all open positions 
-            //        foreach (var op in ops)
-            //        {
-            //            //If the OpenPositionId and the OpenPositionID on the resume match, add it to the list above.
-            //            if (item.OpenPositionID == op.OpenPositionID)
-            //            {
-            //                appliedOpenPositions.Add(op.OpenPositionID);
-            //            }
-            //        }
-            //    }
-
-            //    //Adds a list to the ViewBag to show in the View.
-            //    ViewBag.AppliedOP = appliedOpenPositions;
-            //}
-            //return View();
-
             var openPositions = db.OpenPositions.Include(o => o.Location).Include(o => o.Position);
             string currentUserId = User.Identity.GetUserId();
 
@@ -122,8 +91,8 @@ namespace JobsForJoe.UI.MVC.Controllers
         {
             if (User.IsInRole("Admin"))
             { 
-            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "LocationID");
-            ViewBag.PositionID = new SelectList(db.Positions, "PositionID", "PositionID");
+            ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "StoreName");
+            ViewBag.PositionID = new SelectList(db.Positions, "PositionID", "Title");
             return View();
             }
 

@@ -13,6 +13,7 @@
         <AssociationConnector Association="JobsForJoeModel.FK_OpenPositions_Positions" ManuallyRouted="false" />
         <EntityTypeShape EntityType="JobsForJoeModel.Application" Width="1.5" PointX="5.25" PointY="0.875" />
         <AssociationConnector Association="JobsForJoeModel.FK_Applications_OpenPositions" />
+        <EntityTypeShape EntityType="JobsForJoeModel.AspNetUserRole" Width="1.5" PointX="5.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

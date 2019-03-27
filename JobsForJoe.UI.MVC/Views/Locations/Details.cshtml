@@ -6,76 +6,100 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h2 class="card-title">Details</h2>
+                        <p class="card-category"></p>
+                    </div>
 
-<div>
-    <h4>Location</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.StoreName)
-        </dt>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
 
-        <dd>
-            @Html.DisplayFor(model => model.StoreName)
-        </dd>
-        
-        <dt>
-            @Html.DisplayNameFor(model => model.StoreNumber)
-        </dt>
+                                <div>
+                                    <h4>Location</h4>
+                                    <hr />
+                                    <dl class="dl-horizontal">
+                                        <dt>
+                                            @Html.DisplayNameFor(model => model.StoreName)
+                                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.StoreNumber)
-        </dd>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.StoreName)
+                                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.City)
-        </dt>
+                                        <dt>
+                                            @Html.DisplayNameFor(model => model.StoreNumber)
+                                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.City)
-        </dd>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.StoreNumber)
+                                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.State)
-        </dt>
+                                        <dt>
+                                            @Html.DisplayNameFor(model => model.City)
+                                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.State)
-        </dd>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.City)
+                                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ManagerID)
-        </dt>
+                                        <dt>
+                                            @Html.DisplayNameFor(model => model.State)
+                                        </dt>
 
-        <dd>
-            @*@Html.DisplayFor(model => model.ManagerID)*@
-            @foreach (UserDetail user in ViewBag.UserDetails)
-            {
-                if (Model.ManagerID == user.UserID)
-                {
+                                        <dd>
+                                            @Html.DisplayFor(model => model.State)
+                                        </dd>
 
-                        @user.FirstName @user.LastName
-                    
-                }
-            }
-        </dd>
+                                        <dt>
+                                            @Html.DisplayNameFor(model => model.ManagerID)
+                                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.StoreImage)
-        </dt>
+                                        <dd>
+                                            @*@Html.DisplayFor(model => model.ManagerID)*@
+                                            @foreach (UserDetail user in ViewBag.UserDetails)
+                                            {
+                                                if (Model.ManagerID == user.UserID)
+                                                {
 
-        <dd>
-            @Html.DisplayFor(model => model.StoreImage)
-        </dd>
+                                                    @user.FirstName @user.LastName
+                                                }
+                                            }
+                                        </dd>
 
-    </dl>
-</div>
-<p>
-    @if (User.IsInRole("Admin"))
-    {
-        @Html.ActionLink("Edit", "Edit", new { id = Model.LocationID }) @:|
+                                        @*<dt>
+                                            @Html.DisplayNameFor(model => model.StoreImage)
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => model.StoreImage)
+                                        </dd>*@
+
+                                    </dl>
+                                </div>
+                                <p>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        @Html.ActionLink("Edit", "Edit", new { id = Model.LocationID }) @:|
     }
-     
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+                                    @Html.ActionLink("Back to List", "Index")
+                                </p>
+
+                                <thead class="text-primary">
+                                    <dl class="dl-horizontal"></dl>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

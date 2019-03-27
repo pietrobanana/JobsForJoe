@@ -24,9 +24,9 @@ namespace JobsForJoe.UI.MVC.Controllers
             //return View(applications.ToList());
             //User is only able to 
 
-            List<UserDetail> deets = db.UserDetails.ToList();
+            
+List<UserDetail> deets = db.UserDetails.ToList();
             ViewBag.UserDetails = deets;
-
             if (User.IsInRole("Admin"))
             {
                 var applications = db.Applications.Include(a => a.OpenPosition);
@@ -46,6 +46,8 @@ namespace JobsForJoe.UI.MVC.Controllers
         // GET: Applications/Details/5
         public ActionResult Details(int? id)
         {
+            List<UserDetail> deets = db.UserDetails.ToList();
+            ViewBag.UserDetails = deets;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

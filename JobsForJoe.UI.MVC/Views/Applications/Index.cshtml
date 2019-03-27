@@ -6,7 +6,7 @@
     JobsForJoeEntities db = new JobsForJoeEntities();
     string userId = User.Identity.GetUserId();
     UserDetail deets = db.UserDetails.Where(u => u.UserID == userId).SingleOrDefault();
-    ViewBag.Title =   "Applications for " + User.Identity.Name ;
+    ViewBag.Title =   "Your Applications" ;
     var fullName = deets.FirstName + " " + deets.LastName;
 }
 
@@ -14,7 +14,7 @@
 
 @if (User.IsInRole("Admin"))
 {
-    <p>
+    <p class="btn btn-secondary">
         @Html.ActionLink("Create New", "Create")
     </p>
 }
