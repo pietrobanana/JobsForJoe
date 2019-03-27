@@ -61,7 +61,7 @@
 
             <div class="sidebar-wrapper">
                 <ul class="nav">
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="@Url.Action("Index","Home")">
                             <i class="material-icons">dashboard</i>
                             <p>Dashboard</p>
@@ -414,8 +414,19 @@
     });
     </script>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    <script>
+        $(function () {
+            $('.nav li').each(function () {
+                if ($(this).find('a').attr('href') == window.location.pathname) {
+                    $('.nav-item').removeClass('active');
+                    $(this).addClass('active');
+                }
+            });
+        });
+    </script>
+
+    @*@Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")*@
     @RenderSection("scripts", required: false)
 </body>
 </html>

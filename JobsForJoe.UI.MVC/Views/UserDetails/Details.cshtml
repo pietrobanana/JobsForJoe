@@ -4,7 +4,7 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+
 
 <div class="content">
     <div class="container-fluid">
@@ -103,21 +103,30 @@
             <div class="col-md-12">
                 <div class="card card-profile">
                     <div class="card-avatar">
-                        <a href="#pablo">
                             <img src="~/Content/Images/Users/@Model.BaristaImage" alt="@Model.FirstName + @Model.LastName" />
-                        </a>
                     </div>
-                    <div class="card-body">
-                        <h6 class="card-category">Here to serve</h6>
-                        <h4 class="card-title">
-                            @Model.FirstName @Model.LastName
-                        </h4>
-                        <p class="card-description">
-                            @Model.Bio
+                    <div class="card card-profile">
+                        <div class="card-header card-header-info">
+                            <h2 class="card-title">
+                                @Model.FirstName @Model.LastName
+                            </h2>
+                            <h3 class="card-category">Here to serve</h3>
+                            <br />
+                            <h4 class="card-description">
+                                @Model.Bio
+                            </h4>
+                        </div>
+                        <div class="card-body">
+                            @*<a href="#pablo" class="btn btn-primary btn-round">Follow</a>*@
+                            <a class="btn btn-info btn-round" href="@Url.Content("~/Content/Images/PDFS/" + Model.ResumeFileName)" target="_blank">Resume</a>
+                        </div>
+                    </div>
+                        <p>
+                            @*<a class="btn btn-secondary btn-round" href="@Url.Action("Edit","UserDetails", new { id = Model.UserID})">Edit</a>*@
+                            @Html.ActionLink("Edit", "Edit", new { id = Model.UserID }) |
+                            @*<a class="btn btn-secondary btn-round" href="@Url.Action("Index","UserDetails", new { id = Model.UserID})">Back to List</a>*@
+                            @Html.ActionLink("Home", "Index", "Home")
                         </p>
-                        @*<a href="#pablo" class="btn btn-primary btn-round">Follow</a>*@
-                        <a class="btn btn-primary btn-round" href="@Url.Content("~/Content/Images/PDFS/" + Model.ResumeFileName)" target="_blank">Resume</a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -181,9 +190,4 @@
 
     </dl>
 </div>-->
-<p>
-    @*<a class="btn btn-secondary btn-round" href="@Url.Action("Edit","UserDetails", new { id = Model.UserID})">Edit</a>*@
-    @Html.ActionLink("Edit", "Edit", new { id = Model.UserID }) |
-    @*<a class="btn btn-secondary btn-round" href="@Url.Action("Index","UserDetails", new { id = Model.UserID})">Back to List</a>*@
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
