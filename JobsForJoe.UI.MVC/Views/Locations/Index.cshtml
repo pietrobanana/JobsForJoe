@@ -73,9 +73,16 @@
                         @Html.DisplayFor(modelItem => item.StoreImage)
                     </td>*@
                                         <td>
-                                            @Html.ActionLink("Edit", "Edit", new { id = item.LocationID }) |
-                                            @Html.ActionLink("Details", "Details", new { id = item.LocationID }) |
-                                            @Html.ActionLink("Delete", "Delete", new { id = item.LocationID })
+                                            @if (User.IsInRole("Admin"))
+	                                        {
+		                                        @Html.ActionLink("Edit", "Edit", new { id = item.LocationID }) @:|
+                                            }
+                                            
+                                            @Html.ActionLink("Details", "Details", new { id = item.LocationID }) 
+                                            @if (User.IsInRole("Admin"))
+                                            {
+                                               @:| @Html.ActionLink("Delete", "Delete", new { id = item.LocationID })
+                                            }
                                         </td>
                                     </tr>
                                 }
