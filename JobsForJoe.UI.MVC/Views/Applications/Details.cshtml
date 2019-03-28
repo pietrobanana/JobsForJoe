@@ -1,7 +1,12 @@
 ﻿@model JobsForJoe.Data.EF.Application
+@using Microsoft.AspNet.Identity
+@using JobsForJoe.Data.EF
 
 @{
-    ViewBag.Title = "Details";
+    JobsForJoeEntities db = new JobsForJoeEntities();
+    string userId = User.Identity.GetUserId();
+    UserDetail deets = db.UserDetails.Where(u => u.UserID == userId).SingleOrDefault();
+    ViewBag.Title = "Application Details";
 }
 
 
@@ -29,9 +34,15 @@
                                             @Html.DisplayNameFor(model => model.UserID)
                                         </dt>
 
-                                        <dd>
-                                            @Html.DisplayFor(model => model.UserID)
-                                        </dd>
+                                        @foreach (UserDetail user in ViewBag.UserDetails)
+                                        {
+                                            if (Model.UserID == user.UserID)
+                                            {
+                                                <dd>
+                                                    @user.FirstName @user.LastName
+                                                </dd>
+                                            }
+                                        }
 
                                         <dt>
                                             @Html.DisplayNameFor(model => model.ApplicationDate)
@@ -62,7 +73,8 @@
                                         </dt>
 
                                         <dd>
-                                            @Html.DisplayFor(model => model.ResumeFilename)
+                                            <a class="btn btn-primary btn-round" href="@Url.Content("~/Content/Images/PDFS/" + Model.ResumeFilename)" target="_blank">Resume</a>
+                                            @*@Html.DisplayFor(model => model.ResumeFilename)*@
                                         </dd>
 
                                         <dt>

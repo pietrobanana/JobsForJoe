@@ -1,14 +1,110 @@
 ﻿@model IEnumerable<JobsForJoe.Data.EF.OpenPosition>
 @using Microsoft.AspNet.Identity
-
+@using JobsForJoe.Data.EF
 
 
 
 @{
     ViewBag.Title = "Open Positions";
+    OpenPosition jobDeets = new OpenPosition();
 }
 
-<h2>@ViewBag.Title</h2>
+
+
+
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h2 class="card-title">@ViewBag.Title</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Position.Title)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Location.StoreName)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Location.City)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Location.State)
+                                    </th>
+                                    <th></th>
+                                </tr>
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Position.Title)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Location.StoreName)
+                                        </td>
+                                        <th>
+                                            @Html.DisplayFor(modelItem => item.Location.City)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayFor(modelItem => item.Location.State)
+                                        </th>
+                                        <td>
+                                            @if (User.Identity.IsAuthenticated)
+                                            {
+                                                if (ViewBag.AppliedOP != null)
+                                                {
+                                                    if (ViewBag.AppliedOP.Contains(item.OpenPositionID))
+                                                    {
+                                                        <i class="material-icons">done_outline</i>
+                                                    }
+                                                    else
+                                                    {
+                                                        <button class="btn btn-info" data-toggle="modal">
+                                                            @Html.ActionLink("Apply", "Apply", new { id = item.OpenPositionID })
+                                                        </button>
+                                                    }
+                                                }
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink("Upload Resume", "Edit", "UserDetails", new { id = User.Identity.GetUserId() }, null)
+                                            }
+
+
+                                        </td>
+                                        <td>
+                                            @if (User.IsInRole("Admin"))
+                                            {
+                                                @Html.ActionLink("Edit", "Edit", new { id = item.OpenPositionID }) @:|
+                                             }
+                                                @Html.ActionLink("Details", "Details", new { id = item.OpenPositionID, })
+                                            @if (User.IsInRole("Admin"))
+                                            {
+                                                @:| @Html.ActionLink("Delete", "Delete", new { id = item.OpenPositionID })
+                                            }
+
+                                        </td>
+
+                                    </tr>
+                                }
+
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 @if (User.IsInRole("Admin"))
 {
@@ -17,75 +113,4 @@
     </p>
 }
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Position.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Location.StoreName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Location.City)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Location.State)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Position.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Location.StoreName)
-        </td>
-        <th>
-            @Html.DisplayFor(modelItem => item.Location.City)
-        </th>
-        <th>
-            @Html.DisplayFor(modelItem => item.Location.State)
-        </th>
-        <td>
-            @if (User.Identity.IsAuthenticated)
-            {
-                if (ViewBag.AppliedOP != null )
-                {
-                    if (ViewBag.AppliedOP.Contains(item.OpenPositionID))
-                    {
-                        <i class="material-icons">done_outline</i>
-                    }
-                    else
-                    {
-                        <button class="btn btn-info">
-                            @Html.ActionLink("Apply", "Apply", new { id = item.OpenPositionID })
-                        </button>
-                    }
-                }
-            }
-            else
-            {
-                @Html.ActionLink("Upload Resume", "Edit", "UserDetails", new { id = User.Identity.GetUserId() }, null)
-            }
-
-
-        </td>
-        <td>
-            @if (User.IsInRole("Admin"))
-            {
-                @Html.ActionLink("Edit", "Edit", new { id = item.OpenPositionID }) @:|
-            }
-            
-            @Html.ActionLink("Details", "Details", new { id=item.OpenPositionID }) 
-            @if (User.IsInRole("Admin"))
-            {
-               @:| @Html.ActionLink("Delete", "Delete", new { id = item.OpenPositionID })
-            }
-            
-        </td>
-    </tr>
-}
-
-</table>

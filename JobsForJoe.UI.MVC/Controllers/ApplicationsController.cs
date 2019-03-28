@@ -25,7 +25,7 @@ namespace JobsForJoe.UI.MVC.Controllers
             //User is only able to 
 
             
-List<UserDetail> deets = db.UserDetails.ToList();
+            List<UserDetail> deets = db.UserDetails.ToList();
             ViewBag.UserDetails = deets;
             if (User.IsInRole("Admin"))
             {

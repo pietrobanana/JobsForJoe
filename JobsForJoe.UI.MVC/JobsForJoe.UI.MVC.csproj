@@ -226,6 +226,7 @@
     <Content Include="Content\assets\css\material-dashboard.min.css" />
     <Content Include="Content\assets\demo\demo.css" />
     <Content Include="Content\assets\demo\demo.js" />
+    <Content Include="Content\assets\img\android-chrome-512x512.png" />
     <Content Include="Content\assets\img\apple-icon.png" />
     <Content Include="Content\assets\img\coffav.png" />
     <Content Include="Content\assets\img\cover.jpg" />
@@ -234,6 +235,7 @@
     <Content Include="Content\assets\img\faces\card-profile1-square.jpg" />
     <Content Include="Content\assets\img\faces\card-profile2-square.jpg" />
     <Content Include="Content\assets\img\faces\marc.jpg" />
+    <Content Include="Content\assets\img\favicon.ico" />
     <Content Include="Content\assets\img\favicon.png" />
     <Content Include="Content\assets\img\mask.png" />
     <Content Include="Content\assets\img\new_logo.png" />
@@ -267,8 +269,8 @@
     <Content Include="Content\Images\Site\f27580c41fc107ad4496ac6d8c9685e8.jpg" />
     <Content Include="Content\Images\Site\index-image.jpg" />
     <Content Include="Content\Images\Site\logocoffee.jpg" />
+    <Content Include="Content\Images\Site\logo_809faea7-c2b4-4234-bfd6-adee80f4dd54_260x.png" />
     <Content Include="Content\Images\Site\logo_wip_tadcarpenter-02.jpg" />
-    <Content Include="Content\Images\Site\messenger.png" />
     <Content Include="Content\Images\Site\MidtownFS.jpg" />
     <Content Include="Content\Images\Site\MissionFS.jpg" />
     <Content Include="Content\Images\Site\tazza.jpg" />

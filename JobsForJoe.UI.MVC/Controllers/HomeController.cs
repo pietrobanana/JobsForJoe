@@ -1,5 +1,8 @@
-﻿using JobsForJoe.UI.MVC.Models;
+﻿using JobsForJoe.Data.EF;
+using JobsForJoe.UI.MVC.Models;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Web.Mvc;
@@ -8,9 +11,13 @@ namespace JobsForJoe.UI.MVC.Controllers
 {
     public class HomeController : Controller
     {
+        private JobsForJoeEntities db = new JobsForJoeEntities();
+
         [HttpGet]
         public ActionResult Index()
         {
+            List<UserDetail> deets = db.UserDetails.ToList();
+            ViewBag.UserDetails = deets;
             return View();
         }
 

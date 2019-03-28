@@ -1,74 +1,164 @@
-﻿
+﻿@model JobsForJoe.Data.EF.UserDetail
+@using Microsoft.AspNet.Identity
+@using JobsForJoe.Data.EF
 
 @{
-    
+    //if (Request.IsAuthenticated)
+    //{
+    JobsForJoeEntities db = new JobsForJoeEntities();
+    string userId = User.Identity.GetUserId();
+    UserDetail deets = db.UserDetails.Where(u => u.UserID == userId).SingleOrDefault();
+//}
 }
 
 <div class="content">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card card-chart">
-                    <div class="card-header">
-                        @*<div class="ct-chart" id="dailySalesChart"></div>*@
-                        <a href="@Url.Action("Index","OpenPositions")">
-                            <img class="img-index" src="~/Content/Images/Site/MidtownFS.jpg" />
-                        </a>
-                    </div>
-                    <div class="card-body">
-                        <h4 class="card-title">Food Preps Needed!</h4>
-                        <p class="card-category">
-                            <span class="text-success"> Urgent Need! </span> Click the image to apply
-                        </p>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            <i class="material-icons">access_time</i> updated 4 minutes ago
-                        </div>
-                    </div>
-                </div>
+        <div class="card">
+            <div class="card-header card-header-primary">
+                <h2 class="title text-center">Featured Job Openings</h2>
             </div>
-
-            <div class="col-md-4">
-                <div class="card card-chart">
-                    <div class="card-header">
-                        @*<div class="ct-chart" id="websiteViewsChart"></div>*@
-                        <a href="@Url.Action("Index","OpenPositions")">
-                            <img class="img-index" src="~/Content/Images/Site/MissionFS.jpg" />
-                        </a>
-                    </div>
-                    <div class="card-body">
-                        <h4 class="card-title">Various Openings!</h4>
-                        <p class="card-category">Click the image to apply</p>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            <i class="material-icons">access_time</i> 1 days ago
-                        </div>
-                    </div>
-                </div>
+            <div class="card-body">
             </div>
-
-            <div class="col-md-4">
-                <div class="card card-chart">
-                    <div class="card-header">
-                        @*<div class="ct-chart" id="completedTasksChart"></div>*@
-                        <a href="@Url.Action("Index","OpenPositions")">
-                            <img class="img-index" src="~/Content/Images/Site/WestportFS.jpg" />
-                        </a>
-                    </div>
-                    <div class="card-body">
-                        <h4 class="card-title">New Barista Positions!</h4>
-                        <p class="card-category">Click the image to apply</p>
-                    </div>
-                    <div class="card-footer">
-                        <div class="stats">
-                            <i class="material-icons">access_time</i> 2 days ago
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
+    </div>           
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card card-chart">
+                            <div class="card-header">
+                                @*<div class="ct-chart" id="dailySalesChart"></div>*@
+                                <a href="@Url.Action("Index","OpenPositions")">
+                                    <img class="img-index" src="~/Content/Images/Site/MidtownFS.jpg" />
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <h4 class="card-title">Food Preps Needed!</h4>
+                                <p class="card-category">
+                                    <span class="text-success"> Urgent Need! </span> Click the image to apply
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats">
+                                    <i class="material-icons">access_time</i> updated 4 minutes ago
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card card-chart">
+                            <div class="card-header">
+                                @*<div class="ct-chart" id="websiteViewsChart"></div>*@
+                                <a href="@Url.Action("Index","OpenPositions")">
+                                    <img class="img-index" src="~/Content/Images/Site/MissionFS.jpg" />
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <h4 class="card-title">Various Openings!</h4>
+                                <p class="card-category">Click the image to apply</p>
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats">
+                                    <i class="material-icons">access_time</i> 1 days ago
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card card-chart">
+                            <div class="card-header">
+                                @*<div class="ct-chart" id="completedTasksChart"></div>*@
+                                <a href="@Url.Action("Index","OpenPositions")">
+                                    <img class="img-index" src="~/Content/Images/Site/WestportFS.jpg" />
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <h4 class="card-title">New Barista Positions!</h4>
+                                <p class="card-category">Click the image to apply</p>
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats">
+                                    <i class="material-icons">access_time</i> 2 days ago
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card card-stats">
+                    @*@if (Request.IsAuthenticated)
+                    {
+                        foreach (UserDetail user in ViewBag.UserDetails)
+                        {
+                            if (Model.UserID == user.UserID)
+                            {*@
+                                @*<a href="@Url.Action("Index", "Applications", new { id = user.UserID })">*@
+                                    <div class="card-header card-header-warning card-header-icon">
+                                        <div class="card-icon">
+                                            <i class="material-icons">done_all</i>
+                                        </div>
+                                        <h3 class="card-title">Your Applications</h3>
+                                    </div>
+                                @*</a>*@
+                            @*}
+                        }
+                    }*@
+                <div class="card-footer">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card card-stats">
+                @*@if (Request.IsAuthenticated)
+                {
+                    foreach (UserDetail user in ViewBag.UserDetails)
+                    {
+                        if (Model.UserID == user.UserID)
+                        {*@
+                            @*<a href="@Url.Action("Index", "OpenPositions", new { id = user.UserID })">*@
+                                <div class="card-header card-header-danger card-header-icon">
+                                    <div class="card-icon">
+                                        <i class="material-icons">add_shopping_cart</i>
+                                    </div>
+                                    <h3 class="card-title">Open Positions</h3>
+                                </div>
+                            </a>
+                        @*}
+                    }
+                }*@
+                <div class="card-footer">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card card-stats">
+                @*@if (Request.IsAuthenticated)
+                {
+                    foreach (UserDetail user in ViewBag.UserDetails)
+                    {
+                        if (Model.UserID == user.UserID)
+                        {*@
+                            @*<a href="@Url.Action("Edit", "UserDetails", new { id = user.UserID })">*@
+                                <div class="card-header card-header-success card-header-icon">
+                                    <div class="card-icon">
+                                        <i class="material-icons">update</i>
+                                    </div>
+                                    <h3 class="card-title">Update your profile</h3>
+                                </div>
+                            </a>
+                        @*}
+                    }
+                }*@
+                <div class="card-footer">
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
