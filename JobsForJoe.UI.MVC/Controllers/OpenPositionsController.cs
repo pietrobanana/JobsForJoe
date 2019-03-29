@@ -28,20 +28,14 @@ namespace JobsForJoe.UI.MVC.Controllers
             {
                 if (User.IsInRole("Employee"))
                 {
-                    //UserDetail deets = new UserDetail();
-                    //Getting applications with the same resume on file as the current user.
                     var apps = db.Applications.Where(m => m.ResumeFilename == user.ResumeFileName);
 
-                    //Gets all open positions.
                     var ops = db.OpenPositions.Include(o => o.Location).Include(o => o.Position);
 
-                    //Create a list to put all the open positions the employee has applied for.
                     List<int> appliedOpenPositions = new List<int>();
 
-                    //Loops through each of the users applications
                     foreach (var item in apps)
                     {
-                        //Loops throuhg all open positions 
                         foreach (var op in ops)
                         {
                             //If the OpenPositionId and the OpenPositionID on the resume match, add it to the list above.
@@ -54,9 +48,6 @@ namespace JobsForJoe.UI.MVC.Controllers
 
                     //Adds a list to the ViewBag to show in the View.
                     ViewBag.AppliedOP = appliedOpenPositions;
-
-
-
                 }
 
                 return View(openPositions.ToList());

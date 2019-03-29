@@ -88,13 +88,15 @@
 
         </div>
     </div>
+
+
+
     <div class="row">
         <div class="col-md-4">
-            <div class="card card-stats">
-                @if (Request.IsAuthenticated)
-                {
-
-                    <a href="@Url.Action("Index", "Applications", new { id = userId })">
+            @if (Request.IsAuthenticated)
+            {
+                <div class="card card-stats">
+                    <a href="@Url.Action("Index", "Applications", new { id = userId })"> 
                         <div class="card-header card-header-warning card-header-icon">
                             <div class="card-icon">
                                 <i class="material-icons">done_all</i>
@@ -102,18 +104,16 @@
                             <h3 class="card-title">Your Applications</h3>
                         </div>
                     </a>
-                }
-
-                <div class="card-footer">
+                    <div class="card-footer">
+                    </div>
                 </div>
-            </div>
+            }  
         </div>
 
-        <div class="col-md-4">
-            <div class="card card-stats">
-                @if (Request.IsAuthenticated)
-                {
-
+        <div class="col-md-4">     
+            @if (Request.IsAuthenticated)
+            {
+                <div class="card card-stats">
                     <a href="@Url.Action("Index", "OpenPositions", new { id = userId })">
                         <div class="card-header card-header-danger card-header-icon">
                             <div class="card-icon">
@@ -123,19 +123,19 @@
                         </div>
                     </a>
 
-                }
-                <div class="card-footer">
+                        
+                    <div class="card-footer">
+                    </div>
                 </div>
+            }
             </div>
-        </div>
 
         <div class="col-md-4">
-            <div class="card card-stats">
-                @if (Request.IsAuthenticated)
-                {
-
+            @if (Request.IsAuthenticated)
+            {
+                <div class="card card-stats">
                     <a href="@Url.Action("Edit", "UserDetails", new { id = userId })">
-  
+
                         <div class="card-header card-header-success card-header-icon">
                             <div class="card-icon">
                                 <i class="material-icons">update</i>
@@ -143,11 +143,12 @@
                             <h3 class="card-title">Update your profile</h3>
                         </div>
                     </a>
-                }
+                        
 
-                <div class="card-footer">
+                    <div class="card-footer">
+                    </div>
                 </div>
-            </div>
+            }
         </div>
 
     </div>

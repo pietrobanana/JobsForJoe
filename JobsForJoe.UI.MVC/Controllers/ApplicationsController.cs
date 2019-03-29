@@ -20,11 +20,9 @@ namespace JobsForJoe.UI.MVC.Controllers
         // GET: Applications
         public ActionResult Index(OneClickApply model)
         {
-            //var applications = db.Applications.Include(a => a.OpenPosition);
-            //return View(applications.ToList());
-            //User is only able to 
+            string currentUserId = User.Identity.GetUserId();//<--Gets Id from current user.
+            UserDetail user = db.UserDetails.FirstOrDefault(x => x.UserID == currentUserId); //<--pairs it to the userId from the user details
 
-            
             List<UserDetail> deets = db.UserDetails.ToList();
             ViewBag.UserDetails = deets;
             if (User.IsInRole("Admin"))
@@ -34,13 +32,42 @@ namespace JobsForJoe.UI.MVC.Controllers
             }
             else
             {
-                string currentUserId = User.Identity.GetUserId();
-                return View(db.Applications.Where(x => x.UserID == currentUserId));
+                if (User.IsInRole("Store Manager"))
+                {
+
+                   
+
+                    //var apps = db.Applications;
+
+                    //var loc = db.OpenPositions;
+
+                    //List<int> manApps = new List<int>();
+
+                    //foreach (var item in apps)
+                    //{
+                    //    foreach (var m in loc)
+                    //    {
+                    //        if (item.OpenPositionID == m.OpenPositionID)
+                    //        {
+                    //            manApps.Add(m.OpenPositionID);
+                    //        }
+                    //    }
+                    //}
+
+                    //Adds a list to the ViewBag to show in the View.
+                    //ViewBag.ManagerApps = manApps;
+
+
+                }
+
+                else
+                {
+                    return View(db.Applications.Where(x => x.UserID == currentUserId));
+                }
+
+                var applications = db.Applications.Include(a => a.OpenPosition);
+                return View(applications.ToList());
             }
-
-
-            
-            
         }
 
         // GET: Applications/Details/5

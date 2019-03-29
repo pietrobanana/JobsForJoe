@@ -61,9 +61,9 @@
                                         <td>
                                             @*@Html.DisplayFor(modelItem => item.UserID)*@
                                             @foreach (UserDetail user in ViewBag.UserDetails)
-                {
-                    if (item.UserID == user.UserID)
-                    {
+                                                {
+                                                    if (item.UserID == user.UserID)
+                                                    {
                                                     <p>
                                                         @user.FirstName @user.LastName
                                                     </p>
